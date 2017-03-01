@@ -189,8 +189,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <div class="modal-body">
                   <label>CEP</label>
+                  <input type='hidden' id="id_addr">
                   <div class="form-group has-feedback">
-                    <input type="text" class="form-control" id="cep_e" placeholder="Cidade" >
+                    <input type="text" class="form-control"  id="cep_e" placeholder="Cidade" >
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                   </div>
                   <label> Cidade </label>
@@ -227,7 +228,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                  <button type="button" class="btn btn-primary" id='btn_save_edit_address'>Salvar</button>
+                  <button type="button" class="btn btn-danger" id="delete_address" >Excluir endereço</button>
                 </div>
               </div>
             </div>

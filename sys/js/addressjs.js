@@ -74,6 +74,7 @@ $(".edit_link").click(function(){
    })
   .done(function( data ) {
     var obj = jQuery.parseJSON(data);
+      $("#id_addr").val(id);
       $("#cep_e").val(obj.cep);
       $("#city_e").val(obj.city);
       $("#uf_e").val(obj.uf);
@@ -82,4 +83,22 @@ $(".edit_link").click(function(){
       $("#complement_e").val(obj.complement);
       $("#street_e").val(obj.street);
   });
+});
+
+$("#delete_address").click(function(){
+  var c = confirm("Você tem certeza que deseja excluir?");
+  if(c){
+    $.post( "del_addr.php", {
+      id: $("#id_addr").val()
+     })
+    .done(function( data ) {
+      var obj = jQuery.parseJSON(data);
+      if(obj.status){
+        alert(obj.message);
+        location.reload();
+      }else{
+        alert(obj.message);
+      }
+    });
+  }
 });
