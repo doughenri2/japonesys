@@ -44,7 +44,7 @@ $("#btn_save_address").click(function(){
   }else if(complement == ""){
      complement = "";
   }else{
-    $.post( "test.php", {
+    $.post( "new_addr.php", {
       cep: cep,
       city: city,
       uf: uf,

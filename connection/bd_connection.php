@@ -1,9 +1,6 @@
 <?php
 $con = mysqli_connect("localhost","root","","marmitexonline");
 
-
-
-//teste for nois
 // Check connection
 if (mysqli_connect_errno())
   {
