@@ -106,7 +106,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <?php
                 }else{
                   echo "<h4> Você não possui endereços cadastrados. </h4>";
-                  echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalCadastro'> Cadastrar agora </button>";
                 }
                 ?>
               </div>

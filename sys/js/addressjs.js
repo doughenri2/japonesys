@@ -64,3 +64,22 @@ $("#btn_save_address").click(function(){
     });
   }
 });
+
+
+
+$(".edit_link").click(function(){
+  var id = $(this).attr('id');
+  $.post( "get_addr.php", {
+    id: id
+   })
+  .done(function( data ) {
+    var obj = jQuery.parseJSON(data);
+      $("#cep_e").val(obj.cep);
+      $("#city_e").val(obj.city);
+      $("#uf_e").val(obj.uf);
+      $("#number_e").val(obj.number);
+      $("#nboor_e").val(obj.neighborhood);
+      $("#complement_e").val(obj.complement);
+      $("#street_e").val(obj.street);
+  });
+});
