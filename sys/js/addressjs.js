@@ -50,12 +50,17 @@ $("#btn_save_address").click(function(){
       uf: uf,
       number: number,
       nboor: nboor,
-      complement: complement
+      complement: complement,
+      street: street
      })
     .done(function( data ) {
-
-
-
+      var obj = jQuery.parseJSON(data);
+      if(obj.status){
+        alert(obj.message);
+        location.reload();
+      }else{
+        alert(obj.message);
+      }
     });
   }
 });

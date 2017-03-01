@@ -75,32 +75,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <div class="box-body">
                 <?php
-
                 require("../connection/bd_connection.php");
                 $SQL = "SELECT * FROM adresses WHERE id_user = '".$_SESSION['id_user']."'";
                 $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
                 if(mysqli_num_rows($result) > 0){
-
+                  ?>
+                  <table class="table table-bordered">
+                      <tbody><tr>
+                        <th>#</th>
+                        <th>Rua</th>
+                        <th>Bairro</th>
+                        <th>Número</th>
+                        <th>Detalhes</th>
+                      </tr>
+                      <?php
+                      while($row = mysqli_fetch_assoc($result)){
+                        echo "
+                            <tr>
+                              <td>".$row['id']."</td>
+                              <td>".$row['street']."</td>
+                              <td>".$row['neighborhood']."</td>
+                              <td>".$row['number']."</td>
+                              <td>
+                              <a href='#' class='edit_link' id='".$row['id']."' data-toggle='modal' data-target='#modalEditar'> Ver detalhes </a>
+                              </td>
+                            </tr>";
+                      }
+                       ?>
+                    </tbody></table>
+                  <?php
                 }else{
                   echo "<h4> Você não possui endereços cadastrados. </h4>";
                   echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalCadastro'> Cadastrar agora </button>";
                 }
-
                 ?>
-
-
-
-
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-
+                <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modalCadastro'> Novo endereço </button>
               </div>
               <!-- /.box-footer-->
             </div>
-
-
-
           <!-- Modal -->
           <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -164,6 +179,61 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
             </div>
           </div>
+
+          <!-- Modal editar -->
+          <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Detalhes do endereço</h4>
+                </div>
+                <div class="modal-body">
+                  <label>CEP</label>
+                  <div class="form-group has-feedback">
+                    <input type="text" class="form-control" id="cep_e" placeholder="Cidade" >
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                  </div>
+                  <label> Cidade </label>
+                  <div class="form-group has-feedback">
+                    <input type="text" class="form-control" id="city_e" placeholder="Cidade" >
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                  </div>
+                  <label> UF </label>
+                  <div class="form-group has-feedback">
+                    <input type="text" class="form-control" id="uf_e" placeholder="UF" >
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                  </div>
+                  <label> Rua </label>
+                  <div class="form-group has-feedback">
+                    <input type="text" class="form-control" id="street_e" placeholder="Rua" >
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                  </div>
+                  <label> Número </label>
+                  <div class="form-group has-feedback">
+                    <input type="text" class="form-control" id="number_e" placeholder="Número" >
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                  </div>
+                  <label> Bairro </label>
+                  <div class="form-group has-feedback">
+                    <input type="text" class="form-control" id="nboor_e" placeholder="Bairro" >
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                  </div>
+                  <label> Complemento </label>
+                  <div class="form-group has-feedback">
+                    <input type="text" class="form-control" id="complement_e" placeholder="Complemento" >
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary" id='btn_save_edit_address'>Salvar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
     </section>
   </div>
   <?php
