@@ -10,6 +10,8 @@
       $row = mysqli_fetch_assoc($result);
 
       if($row['user_type'] == "2"){
+
+        //teste git
         //select fisica
         $SQL_u_f = "SELECT * FROM user_f WHERE id_user = '".$row['id']."'";
         $resultado_f = mysqli_query($con, $SQL_u_f) or die(mysqli_error($con));
