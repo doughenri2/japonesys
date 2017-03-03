@@ -2,9 +2,9 @@
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 03, 2017 at 01:48 PM
--- Server version: 10.1.21-MariaDB
+-- Host: 127.0.0.1
+-- Generation Time: 03-Mar-2017 às 17:02
+-- Versão do servidor: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `adresses`
+-- Estrutura da tabela `adresses`
 --
 
 CREATE TABLE `adresses` (
@@ -39,17 +39,16 @@ CREATE TABLE `adresses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `adresses`
+-- Extraindo dados da tabela `adresses`
 --
 
 INSERT INTO `adresses` (`id`, `id_user`, `cep`, `city`, `uf`, `street`, `number`, `neighborhood`, `complement`) VALUES
-(1, 2, '12245492', 'SÃ£o JosÃ© dos Campos', 'SP', 'Alameda JosÃ© Alves de Siqueira Filho', 90, 'Vila BetÃ¢nia', 'casa'),
-(2, 2, '12245492', 'SÃ£o JosÃ© dos Campos', 'SP', 'Alameda JosÃ© Alves de Siqueira Filho', 10, 'Vila BetÃ¢nia', 'desanda');
+(2, 2, '12245492', 'SÃ£o JosÃ© dos Campos', 'SP', 'Alameda JosÃ© Alves de Siqueira Filho', 90, 'Vila BetÃ¢nia', '20');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `drinks`
+-- Estrutura da tabela `drinks`
 --
 
 CREATE TABLE `drinks` (
@@ -60,10 +59,17 @@ CREATE TABLE `drinks` (
   `qtd_drink` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `drinks`
+--
+
+INSERT INTO `drinks` (`id`, `id_user`, `drink_name`, `drink_price`, `qtd_drink`) VALUES
+(1, 2, 'teste', '12,50', 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phones`
+-- Estrutura da tabela `phones`
 --
 
 CREATE TABLE `phones` (
@@ -73,10 +79,17 @@ CREATE TABLE `phones` (
   `tel_number` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `phones`
+--
+
+INSERT INTO `phones` (`id`, `id_user`, `nome_telefone`, `tel_number`) VALUES
+(1, 1, 'teste tel 1', '(12)92803-5771');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estrutura da tabela `users`
 --
 
 CREATE TABLE `users` (
@@ -89,7 +102,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Extraindo dados da tabela `users`
 --
 
 INSERT INTO `users` (`id`, `user_type`, `login`, `password`, `entry_date`, `user_status`) VALUES
@@ -100,27 +113,31 @@ INSERT INTO `users` (`id`, `user_type`, `login`, `password`, `entry_date`, `user
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_f`
+-- Estrutura da tabela `user_f`
 --
 
 CREATE TABLE `user_f` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `user_cpf` varchar(100) NOT NULL,
-  `user_name` varchar(100) NOT NULL
+  `user_name` varchar(100) NOT NULL,
+  `logo_address` varchar(100) NOT NULL,
+  `start_hour` varchar(45) NOT NULL,
+  `finish_hour` varchar(45) NOT NULL,
+  `make_delivery` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_f`
+-- Extraindo dados da tabela `user_f`
 --
 
-INSERT INTO `user_f` (`id`, `id_user`, `user_cpf`, `user_name`) VALUES
-(1, 1, '445.270.898-62', 'Douglas Henrique');
+INSERT INTO `user_f` (`id`, `id_user`, `user_cpf`, `user_name`, `logo_address`, `start_hour`, `finish_hour`, `make_delivery`) VALUES
+(1, 1, '44527089862', 'Douglas Henrique', 'images/c4ca4238a0b923820dcc509a6f75849bapple-logo_318-40184.jpg', '03:00', '10:30', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_j`
+-- Estrutura da tabela `user_j`
 --
 
 CREATE TABLE `user_j` (
@@ -128,21 +145,25 @@ CREATE TABLE `user_j` (
   `id_user` int(11) NOT NULL,
   `user_cnpj` varchar(100) NOT NULL,
   `social_name` varchar(100) NOT NULL,
-  `fantasy_name` varchar(100) NOT NULL
+  `fantasy_name` varchar(100) NOT NULL,
+  `logo_address` varchar(200) NOT NULL,
+  `start_hour` varchar(45) NOT NULL,
+  `fininsh_hour` varchar(45) NOT NULL,
+  `make_delivery` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_j`
+-- Extraindo dados da tabela `user_j`
 --
 
-INSERT INTO `user_j` (`id`, `id_user`, `user_cnpj`, `social_name`, `fantasy_name`) VALUES
-(1, 2, '91.898.982/1989-82', 'Douglas Henrique', 'douglas'),
-(2, 3, '12.321.321/0392-10', 'DOUGLAS HENRIQUE LTDA', 'douglasdjiaha ');
+INSERT INTO `user_j` (`id`, `id_user`, `user_cnpj`, `social_name`, `fantasy_name`, `logo_address`, `start_hour`, `fininsh_hour`, `make_delivery`) VALUES
+(1, 2, '91.898.982/1989-82', 'Douglas Henrique', 'douglas', '', '', '', 0),
+(2, 3, '12.321.321/0392-10', 'DOUGLAS HENRIQUE LTDA', 'douglasdjiaha ', '', '', '', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_status`
+-- Estrutura da tabela `user_status`
 --
 
 CREATE TABLE `user_status` (
@@ -153,7 +174,7 @@ CREATE TABLE `user_status` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_types`
+-- Estrutura da tabela `user_types`
 --
 
 CREATE TABLE `user_types` (
@@ -162,7 +183,7 @@ CREATE TABLE `user_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_types`
+-- Extraindo dados da tabela `user_types`
 --
 
 INSERT INTO `user_types` (`id`, `name`) VALUES
@@ -229,17 +250,17 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `adresses`
 --
 ALTER TABLE `adresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `drinks`
 --
 ALTER TABLE `drinks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `phones`
 --
 ALTER TABLE `phones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `users`
 --

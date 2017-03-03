@@ -4,7 +4,7 @@
   if(!empty($_POST)){
     $login = anti_injection($_POST['login']);
     $password = anti_injection($_POST['password']);
-    $SQL = "SELECT * FROM users WHERE login = '$login' AND password = md5('$password') AND user_status = '1' LIMIT 1";
+    $SQL = "SELECT *, DATE_FORMAT(entry_date, '%d/%m/%Y') as date_entry FROM users WHERE login = '$login' AND password = md5('$password') AND user_status = '1' LIMIT 1";
     $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
     if(mysqli_num_rows($result) > 0){
       $row = mysqli_fetch_assoc($result);
@@ -19,8 +19,10 @@
 
 
         session_start();
+        $_SESSION['date_entry'] = $row['date_entry'];;
         $_SESSION['login'] = $login;
         $_SESSION['id_user'] = $row['id'];
+        $_SESSION['user_type'] = $row['user_type'];
         $_SESSION['name'] = $row_f['user_name'];
 
         header("Location: ../sys/");
@@ -33,15 +35,17 @@
 
 
         session_start();
+        $_SESSION['date_entry'] = $row['date_entry'];;
         $_SESSION['login'] = $login;
         $_SESSION['id_user'] = $row['id'];
+        $_SESSION['user_type'] = $row['user_type'];
         $_SESSION['name'] = $row_f['social_name'];
 
         header("Location: ../sys/");
 
       }
     }else{
-      echo "<script> alert('Usuário não encontrado.'); window.location='login.html'; </script>";
+      echo "<script> alert('Usuário não encontrado.'); window.location='../login/'; </script>";
     }
   }else{
     $array = array("message" => "No request.", "status" => false);

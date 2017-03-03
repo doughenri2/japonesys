@@ -1,3 +1,6 @@
+$("#phone_number").inputmask('(99)99999-9999');
+
+
 $("#btn_save_phone").click(function(){
   var name_phone = $("#name_phone").val();
   var phone_number = $("#phone_number").val();
