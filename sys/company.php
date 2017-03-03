@@ -34,6 +34,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+
+
+    <style>
+      #div_addresses{
+        display: none;
+        padding: 0px;
+      }
+    </style>
+
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -117,9 +128,88 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <input type="file" id="image" name="image">
                         <p class="help-block">Clique para mudar o logo</p>
                       </div>
-                    </div>
-                    <!-- /.box-body -->
 
+                      <?php
+
+                      if($row['cep'] == "" || $row['cep'] == null){
+                        ?>
+                        <label>CEP</label>
+                          <div class="form-group">
+                            <div class="form-group has-feedback">
+                               <input type="text" class="form-control" placeholder="Digite o seu CEP" id='cep' name='cep'>
+                             </div>
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-success" id='btn_search'>Consultar</button>
+                          </div>
+                        <small> *Digite o cep e o sistema buscará automaticamente. </small><br><br>
+
+
+                        <div class="col-md-12" id="div_addresses">
+                        <label> Cidade </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="city" name="city" placeholder="Cidade" >
+                        </div>
+                        <label> UF </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="uf" name="uf" placeholder="UF" >
+                        </div>
+                        <label> Rua </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="street" name="street" placeholder="Rua" >
+                        </div>
+                        <label> Número </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="number" name="number" placeholder="Número" >
+                        </div>
+                        <label> Bairro </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="nboor" name="nboor" placeholder="Bairro" >
+                        </div>
+                        <label> Complemento </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="complement" name="complement" placeholder="Complemento" >
+                        </div>
+                        </div>
+
+                        <?php
+                      }else{
+                        ?>
+                        <label> CEP </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="cep" name="cep" value="<?php echo $row['cep']?>" placeholder="Cep" >
+                        </div>
+                        <label> Cidade </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="city" name="city" value="<?php echo $row['city']?>" placeholder="Cidade" >
+                        </div>
+                        <label> UF </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="uf" name="uf" value="<?php echo $row['uf']?>" placeholder="UF" >
+                        </div>
+                        <label> Rua </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="street" name="street" value="<?php echo $row['street']?>" placeholder="Rua" >
+                        </div>
+                        <label> Número </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="number" name="number" value="<?php echo $row['number']?>" placeholder="Número" >
+                        </div>
+                        <label> Bairro </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="nboor" name="nboor" value="<?php echo $row['nboor']?>" placeholder="Bairro" >
+                        </div>
+                        <label> Complemento </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="complement" name="complement" value="<?php echo $row['complement']?>" placeholder="Complemento" >
+                        </div>
+                        <?php
+                      }
+
+                       ?>
+
+
+                    </div>
                     <div class="box-footer">
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

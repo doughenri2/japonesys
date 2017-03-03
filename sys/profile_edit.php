@@ -8,6 +8,13 @@
     $start_hour = $_POST['start_hour'];
     $finish_hour = $_POST['finish_hour'];
     $select_delivery= $_POST['select_delivery'];
+    $city= $_POST['city'];
+    $uf= $_POST['uf'];
+    $cep = str_replace("-", "", $_POST['cep']);
+    $street= $_POST['street'];
+    $number= $_POST['number'];
+    $nboor= $_POST['nboor'];
+    $complement= $_POST['complement'];
 
     if($select_delivery == "0"){
       echo "<script>
@@ -21,8 +28,18 @@
             $uploadfile = $uploaddir . md5($_SESSION['id_user']).$_FILES["image"]["name"];
 
               if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
-                $SQL = "UPDATE user_f SET user_name='$name', logo_address='$uploadfile',
-                 start_hour='$start_hour', finish_hour='$finish_hour', make_delivery='$select_delivery' WHERE id_user='".$_SESSION['id_user']."'";
+                $SQL = "UPDATE user_f SET user_name='$name',
+                 logo_address='$uploadfile',
+                 start_hour='$start_hour',
+                 finish_hour='$finish_hour',
+                 make_delivery='$select_delivery',
+                 cep='$cep',
+                 city='$city',
+                 uf='$uf',
+                 street='$street',
+                 number='$number',
+                 nboor='$nboor',
+                 complement='$complement' WHERE id_user='".$_SESSION['id_user']."'";
                  $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
                  if($result){
                    echo "<script> alert('Perfil atualizado com imagem com sucesso.'); window.location='company.php';</script>";
@@ -34,8 +51,17 @@
                   echo "Erro ao subir arquivo.";
               }
             }else{
-            $SQL = "UPDATE user_f SET user_name='$name', start_hour='$start_hour',
-            finish_hour='$finish_hour', make_delivery='$select_delivery'";
+            $SQL = "UPDATE user_f SET user_name='$name',
+            start_hour='$start_hour',
+            finish_hour='$finish_hour',
+            make_delivery='$select_delivery',
+            cep='$cep',
+            city='$city',
+            uf='$uf',
+            street='$street',
+            number='$number',
+            nboor='$nboor',
+            complement='$complement' WHERE id_user='".$_SESSION['id_user']."'";
              $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
              if($result){
                echo "<script> alert('Perfil atualizado com sucesso.'); window.location='company.php';</script>";

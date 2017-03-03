@@ -2,9 +2,9 @@
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 03-Mar-2017 às 17:02
--- Versão do servidor: 10.1.21-MariaDB
+-- Host: localhost
+-- Generation Time: Mar 03, 2017 at 07:01 PM
+-- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,32 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `adresses`
---
-
-CREATE TABLE `adresses` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `cep` varchar(100) NOT NULL,
-  `city` varchar(100) NOT NULL,
-  `uf` varchar(100) NOT NULL,
-  `street` varchar(100) NOT NULL,
-  `number` int(11) NOT NULL,
-  `neighborhood` varchar(100) NOT NULL,
-  `complement` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `adresses`
---
-
-INSERT INTO `adresses` (`id`, `id_user`, `cep`, `city`, `uf`, `street`, `number`, `neighborhood`, `complement`) VALUES
-(2, 2, '12245492', 'SÃ£o JosÃ© dos Campos', 'SP', 'Alameda JosÃ© Alves de Siqueira Filho', 90, 'Vila BetÃ¢nia', '20');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `drinks`
+-- Table structure for table `drinks`
 --
 
 CREATE TABLE `drinks` (
@@ -60,7 +35,7 @@ CREATE TABLE `drinks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `drinks`
+-- Dumping data for table `drinks`
 --
 
 INSERT INTO `drinks` (`id`, `id_user`, `drink_name`, `drink_price`, `qtd_drink`) VALUES
@@ -69,7 +44,27 @@ INSERT INTO `drinks` (`id`, `id_user`, `drink_name`, `drink_price`, `qtd_drink`)
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `phones`
+-- Table structure for table `payment_methods`
+--
+
+CREATE TABLE `payment_methods` (
+  `id` int(11) NOT NULL,
+  `payment_method` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment_methods`
+--
+
+INSERT INTO `payment_methods` (`id`, `payment_method`) VALUES
+(1, 'Dinheiro'),
+(2, 'Débito'),
+(3, 'Crédito');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phones`
 --
 
 CREATE TABLE `phones` (
@@ -80,7 +75,7 @@ CREATE TABLE `phones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `phones`
+-- Dumping data for table `phones`
 --
 
 INSERT INTO `phones` (`id`, `id_user`, `nome_telefone`, `tel_number`) VALUES
@@ -89,7 +84,7 @@ INSERT INTO `phones` (`id`, `id_user`, `nome_telefone`, `tel_number`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -102,7 +97,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `user_type`, `login`, `password`, `entry_date`, `user_status`) VALUES
@@ -113,7 +108,7 @@ INSERT INTO `users` (`id`, `user_type`, `login`, `password`, `entry_date`, `user
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_f`
+-- Table structure for table `user_f`
 --
 
 CREATE TABLE `user_f` (
@@ -124,20 +119,27 @@ CREATE TABLE `user_f` (
   `logo_address` varchar(100) NOT NULL,
   `start_hour` varchar(45) NOT NULL,
   `finish_hour` varchar(45) NOT NULL,
-  `make_delivery` tinyint(1) NOT NULL
+  `make_delivery` tinyint(1) NOT NULL,
+  `cep` varchar(45) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `uf` varchar(10) NOT NULL,
+  `street` varchar(100) NOT NULL,
+  `number` int(11) NOT NULL,
+  `nboor` varchar(100) NOT NULL,
+  `complement` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `user_f`
+-- Dumping data for table `user_f`
 --
 
-INSERT INTO `user_f` (`id`, `id_user`, `user_cpf`, `user_name`, `logo_address`, `start_hour`, `finish_hour`, `make_delivery`) VALUES
-(1, 1, '44527089862', 'Douglas Henrique', 'images/c4ca4238a0b923820dcc509a6f75849bapple-logo_318-40184.jpg', '03:00', '10:30', 1);
+INSERT INTO `user_f` (`id`, `id_user`, `user_cpf`, `user_name`, `logo_address`, `start_hour`, `finish_hour`, `make_delivery`, `cep`, `city`, `uf`, `street`, `number`, `nboor`, `complement`) VALUES
+(1, 1, '44527089862', 'Douglas Henrique', 'images/c4ca4238a0b923820dcc509a6f75849bapple-logo_318-40184.jpg', '03:00', '10:30', 1, '12245492', 'SÃ£o JosÃ© dos Campos', 'SP', 'Alameda JosÃ© Alves de Siqueira Filho', 90, 'Vila BetÃ¢nia', 'teste');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_j`
+-- Table structure for table `user_j`
 --
 
 CREATE TABLE `user_j` (
@@ -153,7 +155,7 @@ CREATE TABLE `user_j` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `user_j`
+-- Dumping data for table `user_j`
 --
 
 INSERT INTO `user_j` (`id`, `id_user`, `user_cnpj`, `social_name`, `fantasy_name`, `logo_address`, `start_hour`, `fininsh_hour`, `make_delivery`) VALUES
@@ -163,7 +165,7 @@ INSERT INTO `user_j` (`id`, `id_user`, `user_cnpj`, `social_name`, `fantasy_name
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_status`
+-- Table structure for table `user_status`
 --
 
 CREATE TABLE `user_status` (
@@ -174,7 +176,7 @@ CREATE TABLE `user_status` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_types`
+-- Table structure for table `user_types`
 --
 
 CREATE TABLE `user_types` (
@@ -183,7 +185,7 @@ CREATE TABLE `user_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `user_types`
+-- Dumping data for table `user_types`
 --
 
 INSERT INTO `user_types` (`id`, `name`) VALUES
@@ -195,15 +197,15 @@ INSERT INTO `user_types` (`id`, `name`) VALUES
 --
 
 --
--- Indexes for table `adresses`
---
-ALTER TABLE `adresses`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `drinks`
 --
 ALTER TABLE `drinks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_methods`
+--
+ALTER TABLE `payment_methods`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -247,15 +249,15 @@ ALTER TABLE `user_types`
 --
 
 --
--- AUTO_INCREMENT for table `adresses`
---
-ALTER TABLE `adresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
 -- AUTO_INCREMENT for table `drinks`
 --
 ALTER TABLE `drinks`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `payment_methods`
+--
+ALTER TABLE `payment_methods`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `phones`
 --

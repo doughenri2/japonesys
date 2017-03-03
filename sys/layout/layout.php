@@ -107,24 +107,15 @@ function topmenu(){
                 </span>
           </div>
         </form>
-        <!-- /.search form -->
-
-        <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
           <li class="header">HEADER</li>
-          <!-- Optionally, you can add icons to the links -->
-
           <li><a href="../sys/"><i class="fa fa-home"></i> <span>Ínicio</span></a></li>
-
-          <li><a href="company.php"><i class="fa fa-building"></i> <span>Meu estabelecimento</span></a></li>
-          <li><a href="addresses.php"><i class="fa fa-map-o"></i> <span>Meus endereços</span></a></li>
+          <li><a href="company.php"><i class="fa fa-building"></i> <span>Meu estabelecimento/endereço</span></a></li>
           <li><a href="phones.php"><i class="fa fa-mobile-phone"></i> <span>Meus telefones</span></a></li>
           <li><a href="drinks.php"><i class="fa fa-glass"></i> <span>Minhas bebidas</span></a></li>'
 
         </ul>
-        <!-- /.sidebar-menu -->
       </section>
-      <!-- /.sidebar -->
     </aside>
     <?php
   }
