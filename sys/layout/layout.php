@@ -205,6 +205,8 @@ function topmenu(){
 
           <li><a href="addresses.php"><i class="fa fa-map-o"></i> <span>Meus endereços</span></a></li>
           <li><a href="phones.php"><i class="fa fa-mobile-phone"></i> <span>Meus telefones</span></a></li>
+          <li><a href="drinks.php"><i class="fa fa-glass"></i> <span>Minhas bebidas</span></a></li>'
+
           <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
           <li class="treeview">
             <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
