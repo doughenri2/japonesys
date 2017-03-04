@@ -1,5 +1,5 @@
 //mask cpf
-$("#cpf").inputmask('999.999.999-99');
+$("#cnpj").inputmask('99.999.999/9999-99');
 $("#cep").inputmask('99999-999');
 
 
@@ -67,5 +67,32 @@ $("#btn_search").on('click',function(){
   .fail(function() {
     alert("Nenhum endereço encontrado.");
     $("#div_addresses").fadeIn(200);
+  });
+});
+
+
+$(".payment_method").click(function(){
+
+  if(!$(this).is(":checked")){
+    // uncheck
+    alert('you are unchecked ' + $(this).val());
+  }else{
+    
+  }
+
+
+
+  $.post( "payment_method.php", {
+    name_phone: name_phone,
+    phone_number: phone_number
+   })
+  .done(function( data ) {
+    var obj = jQuery.parseJSON(data);
+    if(obj.status){
+      alert(obj.message);
+      location.reload();
+    }else{
+      alert(obj.message);
+    }
   });
 });

@@ -84,7 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 if($result){
                   $row = mysqli_fetch_assoc($result);
                   ?>
-                  <form role="form" enctype="multipart/form-data" method="post" id="form_profile" action="profile_edit.php">
+                  <form role="form" enctype="multipart/form-data" method="post" id="form_profile_f" action="profile_edit.php">
                     <div class="box-body">
                       <div class="form-group">
                         <label for="exampleInputEmail1">CPF</label>
@@ -175,10 +175,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <?php
                       }else{
                         ?>
-                        <label> CEP </label>
-                        <div class="form-group has-feedback">
-                          <input type="text" class="form-control" id="cep" name="cep" value="<?php echo $row['cep']?>" placeholder="Cep" >
-                        </div>
+                        <label>CEP</label>
+                          <div class="form-group">
+                            <div class="form-group has-feedback">
+                               <input type="text" class="form-control" placeholder="Digite o seu CEP" id='cep' value="<?php echo $row['cep']?>" name='cep'>
+                             </div>
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-success" id='btn_search'>Consultar</button>
+                          </div>
+                        <small> *Digite o cep e o sistema buscará automaticamente. </small><br><br>
+
+
                         <label> Cidade </label>
                         <div class="form-group has-feedback">
                           <input type="text" class="form-control" id="city" name="city" value="<?php echo $row['city']?>" placeholder="Cidade" >
@@ -211,7 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     </div>
                     <div class="box-footer">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                   </form>
                   <?php
@@ -219,38 +227,161 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   echo "<h3> Usuário não encontrado. </h3>";
                 }
               }else{
-                //fisica
+                //juridica
                 $SQL = "SELECT * FROM user_j WHERE id_user='".$_SESSION['id_user']."'";
                 $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
                 if($result){
                   $row = mysqli_fetch_assoc($result);
                   ?>
-                  <form role="form">
+                  <form role="form" enctype="multipart/form-data" method="post" id="form_profile" action="profile_edit.php">
                     <div class="box-body">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        <label for="exampleInputEmail1">CNPJ</label>
+                        <input type="text" class="form-control" id="cnpj" name="cnpj" readonly="true" value="<?php echo $row['user_cnpj']?>" placeholder="CNPJ">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="exampleInputEmail1">Razão Social</label>
+                        <input type="text" class="form-control" id="social_name" name="social_name" value="<?php echo $row['social_name']?>" placeholder="Razão social">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
+                        <label for="exampleInputEmail1">Nome fantasia</label>
+                        <input type="text" class="form-control" id="fantasy_name" name="fantasy_name" value="<?php echo $row['fantasy_name']?>" placeholder="Nome fantasia">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Horário de início de funcionamento</label>
+                        <input type="time" class="form-control" id="start_hour" name="start_hour" value="<?php echo $row['start_hour']?>" placeholder="Horario de inicio">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Horário de término de funcionamento</label>
+                        <input type="time" class="form-control" id="finish_hour" name="finish_hour" value="<?php echo $row['finish_hour']?>" placeholder="Horario de termino">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Faz delivery</label>
+                        <select id='select_delivery' name="select_delivery" class="form-control">
+                          <?php
+                          if( $row['make_delivery'] == 0){
+                            ?>
+                            <option value="0"> SELECIONE </option>
+                            <option value="1"> Sim </option>
+                            <option value="2" selected="true"> Não </option>
+                            <?php
+                          }else{
+                            ?>
+                            <option value="0"> SELECIONE </option>
+                            <option value="1" selected="true"> Sim </option>
+                            <option value="2"> Não </option>
+                            <?php
+                          }
+                           ?>
 
-                        <p class="help-block">Example block-level help text here.</p>
+                        </select>
                       </div>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> Check me out
-                        </label>
+                      <div class="form-group">
+                        <label for="exampleInputFile">Seu logo</label>
+                        <input type="file" id="image" name="image">
+                        <p class="help-block">Clique para mudar o logo</p>
                       </div>
+
+                      <?php
+
+                      if($row['cep'] == "" || $row['cep'] == null){
+                        ?>
+                        <label>CEP</label>
+                          <div class="form-group">
+                            <div class="form-group has-feedback">
+                               <input type="text" class="form-control" placeholder="Digite o seu CEP" id='cep' name='cep'>
+                             </div>
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-success" id='btn_search'>Consultar</button>
+                          </div>
+                        <small> *Digite o cep e o sistema buscará automaticamente. </small><br><br>
+
+
+                        <div class="col-md-12" id="div_addresses">
+                        <label> Cidade </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="city" name="city" placeholder="Cidade" >
+                        </div>
+                        <label> UF </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="uf" name="uf" placeholder="UF" >
+                        </div>
+                        <label> Rua </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="street" name="street" placeholder="Rua" >
+                        </div>
+                        <label> Número </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="number" name="number" placeholder="Número" >
+                        </div>
+                        <label> Bairro </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="nboor" name="nboor" placeholder="Bairro" >
+                        </div>
+                        <label> Complemento </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="complement" name="complement" placeholder="Complemento" >
+                        </div>
+                        </div>
+
+                        <?php
+                      }else{
+                        ?>
+                        <label>CEP</label>
+                          <div class="form-group">
+                            <div class="form-group has-feedback">
+                               <input type="text" class="form-control" placeholder="Digite o seu CEP" id='cep' value="<?php echo $row['cep']?>" name='cep'>
+                             </div>
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-success" id='btn_search'>Consultar</button>
+                          </div>
+                        <small> *Digite o cep e o sistema buscará automaticamente. </small><br><br>
+
+
+                        <label> Cidade </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="city" name="city" value="<?php echo $row['city']?>" placeholder="Cidade" >
+                        </div>
+                        <label> UF </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="uf" name="uf" value="<?php echo $row['uf']?>" placeholder="UF" >
+                        </div>
+                        <label> Rua </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="street" name="street" value="<?php echo $row['street']?>" placeholder="Rua" >
+                        </div>
+                        <label> Número </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="number" name="number" value="<?php echo $row['number']?>" placeholder="Número" >
+                        </div>
+                        <label> Bairro </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="nboor" name="nboor" value="<?php echo $row['nboor']?>" placeholder="Bairro" >
+                        </div>
+                        <label> Complemento </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="complement" name="complement" value="<?php echo $row['complement']?>" placeholder="Complemento" >
+                        </div>
+                        <?php
+                      }
+
+                       ?>
+
+                          <label> Formas de pagamento </label>
+                         <div class="form-group has-feedback">
+                           <input type="checkbox" class="form-group payment_method" value="1"> Dinheiro <br>
+                           <input type="checkbox" class="form-group payment_method" value="2"> Cartão de Débito <br>
+                           <input type="checkbox" class="form-group payment_method" value="3"> Cartão de crédito <br>
+
+
+                       </div>
                     </div>
-                    <!-- /.box-body -->
+
 
                     <div class="box-footer">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                   </form>
                   <?php
