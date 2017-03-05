@@ -58,16 +58,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </ol>
     </section>
     <section class="content">
-
       <div class="box">
               <div class="box-header with-border">
                 <h3 class="box-title">Marmitas de <?php echo date('d/m/Y');?></h3>
-
               </div>
               <div class="box-body">
                 <?php
                 require("../connection/bd_connection.php");
-                $SQL = "SELECT * FROM pots WHERE id_user = '".$_SESSION['id_user']."' AND entry_date='CURDATE()'";
+                $SQL = "SELECT * FROM pots WHERE id_user = '".$_SESSION['id_user']."' AND entry_date=CURDATE()";
                 $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
                 if(mysqli_num_rows($result) > 0){
                   ?>
@@ -84,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <td>".$row['id']."</td>
                               <td> Opção ".$row['id']."</td>
                               <td>
-                              <a href='#' class='edit_link' id='".$row['id']."'> Excluir </a>
+                              <a href='edit_menu.php?i=".$row['id']."' class='edit_link' id='".$row['id']."'> Ver detalhes </a>
                               </td>
                             </tr>";
                       }
@@ -103,8 +101,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- /.box-footer-->
             </div>
           <!-- Modal -->
-
-
     </section>
   </div>
   <?php
