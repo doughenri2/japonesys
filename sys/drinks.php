@@ -58,8 +58,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Minhas bebidas
-        <small>Todos as bebidas cadastradas</small>
+        Minhas bebidas e sobremesas
+        <small>Todos as bebidas cadastradas e sobremesas</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="../sys/"><i class="fa fa-dashboard"></i> Ínicio</a></li>
@@ -73,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <h3 class="box-title">Bebidas</h3>
 
               </div>
-              <div class="box-body">
+              <div class="box-body" style='max-height:200px;overflow-y:auto;'>
                 <?php
                 require("../connection/bd_connection.php");
                 $SQL = "SELECT * FROM drinks WHERE id_user = '".$_SESSION['id_user']."'";
@@ -149,6 +149,88 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
           </div>
 
+
+          <div class="box box-success">
+                  <div class="box-header ">
+                    <h3 class="box-title">Sobremesas</h3>
+
+                  </div>
+                  <div class="box-body" style='max-height:200px;overflow-y:auto;'>
+                    <?php
+                    require("../connection/bd_connection.php");
+                    $SQL_dessert = "SELECT * FROM dessert WHERE id_user = '".$_SESSION['id_user']."'";
+                    $result_dessert = mysqli_query($con, $SQL_dessert) or die(mysqli_error($con));
+                    if(mysqli_num_rows($result_dessert) > 0){
+                      ?>
+                      <table class="table table-bordered">
+                          <tbody><tr>
+                            <th>#</th>
+                            <th>Nome da sobremesa</th>
+                            <th>Preço da sobremesa</th>
+                            <th>Quantidade</th>
+                            <th>Detalhes</th>
+                          </tr>
+                          <?php
+                          while($row_dessert = mysqli_fetch_assoc($result_dessert)){
+                            echo "
+                                <tr>
+                                  <td>".$row_dessert['id']."</td>
+                                  <td>".$row_dessert['dessert_name']."</td>
+                                  <td>".$row_dessert['price']."</td>
+                                  <td>".$row_dessert['qtd_dessert']."</td>
+                                  <td>
+                                  <a href='#' class='edit_link_dessert' id='".$row_dessert['id']."'> Excluir </a>
+                                  </td>
+                                </tr>";
+                          }
+                           ?>
+                        </tbody></table>
+                      <?php
+                    }else{
+                      echo "<h4> Você não possui sobremesas cadastradas cadastradas. </h4>";
+                    }
+                    ?>
+                  </div>
+                  <!-- /.box-body -->
+                  <div class="box-footer">
+                    <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalSobremesa'> Nova Sobremesa </button>
+                  </div>
+                  <!-- /.box-footer-->
+                </div>
+
+                <div class="modal fade" id="modalSobremesa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Nova Sobremesa</h4>
+                      </div>
+                      <div class="modal-body">
+
+                        <label> Nome da sobremesa</label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="dessert_name" placeholder="Nome da sobremesa" >
+                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                        <label> Preço da sobremesa </label>
+                        <div class="form-group has-feedback">
+                          <input type="text" class="form-control" id="dessert_price" placeholder="Preço da sobremesa" >
+                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                        <label> Quantidade </label>
+                        <div class="form-group has-feedback">
+                          <input type="number" class="form-control" id="qtd_dessert" placeholder="Quantidade da sobremesa" >
+                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" id='btn_save_dessert'>Salvar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
     </section>
   </div>
   <?php
@@ -164,6 +246,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../components_sys/bootstrap/js/bootstrap.min.js"></script>
 <script src="../components_sys/dist/js/app.min.js"></script>
 <script src="js/drinksjs.js"></script>
+<script src="js/dessert.js"></script>
 
 </body>
 </html>

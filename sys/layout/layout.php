@@ -112,7 +112,7 @@ function topmenu(){
           <li><a href="../sys/"><i class="fa fa-home"></i> <span>Pedidos</span></a></li>
           <li><a href="menus.php"><i class="fa fa-bars"></i> <span>Cardápios</span></a></li>
           <li><a href="drinks.php"><i class="fa fa-glass"></i> <span>Minhas bebidas/ Sobremesas</span></a></li>
-          <li><a href="#"><i class="fa fa-glass"></i> <span>Estatísticas</span></a></li>
+          <li><a href="statistics.php"><i class="fa fa-line-chart"></i> <span>Estatísticas</span></a></li>
           <li><a href="company.php"><i class="fa fa-building"></i> <span>Perfil</span></a></li>
           <li><a href="phones.php"><i class="fa fa-mobile-phone"></i> <span>Meus telefones</span></a></li>
         </ul>
