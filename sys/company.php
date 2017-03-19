@@ -42,6 +42,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         display: none;
         padding: 0px;
       }
+
+
     </style>
 
 
@@ -123,6 +125,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         </select>
                       </div>
+                      <div class="form-group" id="nboor_div">
+                        <label for="exampleInputEmail1">Nome</label>
+                        <input type="text" class="form-control" name="name" placeholder="Seu nome">
+                      </div>
+
                       <div class="form-group">
                         <label for="exampleInputFile">File input</label>
                         <input type="file" id="image" name="image">
@@ -276,6 +283,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         </select>
                       </div>
+                      <div class="form-group" id="nboor_div">
+                        <label for="exampleInputEmail1">Nome</label>
+                        <input type="text" class="form-control" name="name" placeholder="Seu nome">
+                      </div>
                       <div class="form-group">
                         <label for="exampleInputFile">Seu logo</label>
                         <input type="file" id="image" name="image">
@@ -296,8 +307,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <button type="submit" class="btn btn-success" id='btn_search'>Consultar</button>
                           </div>
                         <small> *Digite o cep e o sistema buscará automaticamente. </small><br><br>
-
-
                         <div class="col-md-12" id="div_addresses">
                         <label> Cidade </label>
                         <div class="form-group has-feedback">
@@ -411,6 +420,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../components_sys/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script src="js/company_j.js"></script>
 <script src="js/company_f.js"></script>
+
+
+<script>
+
+
+$(document).ready(function(){
+
+
+
+  switch ($("#select_delivery").val()) {
+    case 1:
+      $("#nboor_div").fadeIn();
+      break;
+    case 2:
+      $("#nboor_div").fadeOut();
+      break;
+    default:
+    $("#nboor_div").hide();
+  }
+
+  $("#select_delivery").on('change',function(){
+
+    switch ($(this).val()) {
+      case 1:
+        $("#nboor_div").fadeIn();
+        break;
+      case 2:
+        $("#nboor_div").fadeOut();
+        break;
+    }
+
+  });
+
+});
+</script>
 
 </body>
 </html>
