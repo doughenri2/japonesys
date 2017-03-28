@@ -3,6 +3,7 @@ $("#cpf").inputmask('999.999.999-99');
 $("#cep").inputmask('99999-999');
 
 
+
 $("#form_profile_f").submit(function(){
   var name = $("#name").val();
   var start_hour = $("#start_hour").val();

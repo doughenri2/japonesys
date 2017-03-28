@@ -125,11 +125,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         </select>
                       </div>
-                      <div class="form-group" id="nboor_div">
-                        <label for="exampleInputEmail1">Nome</label>
-                        <input type="text" class="form-control" name="name" placeholder="Seu nome">
-                      </div>
 
+                      <?php
+                      $display = "";
+
+                      if($row['make_delivery'] == 0){
+                        $display = "style='display: none;'";
+                      }
+
+
+                       ?>
+                      <div class="form-group" id="nboor_div" <?php echo $display?>>
+                        <button type="button" class="btn btn-primary" data-toggle='modal' data-target='#modalBairros'> Adicionar bairro </button><br>
+                      </div>
+                      <?php
+                        $SQLnboor = "SELECT * FROM neighborhood_taxes WHERE id_user='".$_SESSION['id_user']."'";
+                        $result_n = mysqli_query($con, $SQLnboor) or die(mysqli_error($con));
+                        if(mysqli_num_rows($result_n) > 0){
+                          ?>
+                          <h3> Bairros e taxas </h3>
+                          <table class="table table-hover">
+                            <tr> <td> Bairro </td> <td> Preço </td> <td> Ação </td> </tr>
+                            <?php
+                            while($linha_n = mysqli_fetch_assoc($result_n)){
+                              echo "<tr><td>".$linha_n['nboor_name']."</td><td>".$linha_n['nboor_tax']."</td><td> <button type='button' class='btn btn-danger delete_nboor' id='".$linha_n['id']."'> Excluir </button> </td></tr>";
+                            }
+                            ?>
+                          </table>
+                          <?php
+                        }
+
+                       ?>
                       <div class="form-group">
                         <label for="exampleInputFile">File input</label>
                         <input type="file" id="image" name="image">
@@ -283,10 +309,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         </select>
                       </div>
-                      <div class="form-group" id="nboor_div">
-                        <label for="exampleInputEmail1">Nome</label>
-                        <input type="text" class="form-control" name="name" placeholder="Seu nome">
+                      <?php
+                        $display = "";
+                        if($row['make_delivery'] == 0){
+                          $display = "style='display: none;'";
+                        }
+                       ?>
+                      <div class="form-group" id="nboor_div" <?php echo $display?>>
+                        <button type="button" class="btn btn-primary" data-toggle='modal' data-target='#modalBairros'>Adicionar bairros </button>
                       </div>
+
+                      <?php
+                        $SQLnboor = "SELECT * FROM neighborhood_taxes WHERE id_user='".$_SESSION['id_user']."'";
+                        $result_n = mysqli_query($con, $SQLnboor) or die(mysqli_error($con));
+                        if(mysqli_num_rows($result_n) > 0){
+                          ?>
+                          <table class="table table-hover">
+                            <tr> <td> Bairro </td> <td> Preço </td> <td> Ação </td></tr>
+                            <?php
+                            while($linha_n = mysqli_fetch_assoc($result_n)){
+                              echo "<tr><td>".$linha_n['nboor_name']."</td><td>".$linha_n['nboor_tax']."</td><td> <button type='button' class='btn btn-danger delete_nboor' id='".$linha_n['id']."'> Excluir </button> </td></tr>";
+                            }
+                            ?>
+                          </table>
+                          <?php
+                        }
+
+                       ?>
                       <div class="form-group">
                         <label for="exampleInputFile">Seu logo</label>
                         <input type="file" id="image" name="image">
@@ -380,9 +429,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                           <label> Formas de pagamento </label>
                          <div class="form-group has-feedback">
-                           <input type="checkbox" class="form-group payment_method" value="1"> Dinheiro <br>
-                           <input type="checkbox" class="form-group payment_method" value="2"> Cartão de Débito <br>
-                           <input type="checkbox" class="form-group payment_method" value="3"> Cartão de crédito <br>
+                           <input type="checkbox" class="form-group payment_method" value="1" class="payment_form"> Dinheiro <br>
+                           <input type="checkbox" class="form-group payment_method" value="2" class="payment_form"> Cartão de Débito <br>
+                           <input type="checkbox" class="form-group payment_method" value="3" class="payment_form"> Cartão de crédito <br>
 
 
                        </div>
@@ -403,6 +452,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
     </section>
   </div>
+                  <div class="modal fade" id="modalBairros" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Nova Sobremesa</h4>
+                        </div>
+                        <div class="modal-body">
+                          <label> Nome do bairro</label>
+                          <div class="form-group has-feedback">
+                            <input type="text" class="form-control" id="nboorname" placeholder="Nome do bairro" >
+                          </div>
+                          <label> Preço da taxa </label>
+                          <div class="form-group has-feedback">
+                            <input type="text" class="form-control money" id="nboorprice" placeholder="Preço do bairro" >
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                          <button type="button" class="btn btn-primary" id='btn_save_nboor'>Salvar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
   <?php
   rodape();
 
@@ -418,8 +492,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../components_sys/plugins/input-mask/jquery.inputmask.js"></script>
 <script src="../components_sys/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script src="../components_sys/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="js/maskmoney.js"></script>
 <script src="js/company_j.js"></script>
 <script src="js/company_f.js"></script>
+
 
 
 <script>
@@ -427,31 +503,80 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 $(document).ready(function(){
 
+  $(".money").maskMoney({prefix:'R$ '});
 
-
-  switch ($("#select_delivery").val()) {
-    case 1:
-      $("#nboor_div").fadeIn();
-      break;
-    case 2:
-      $("#nboor_div").fadeOut();
-      break;
-    default:
-    $("#nboor_div").hide();
-  }
-
-  $("#select_delivery").on('change',function(){
-
+  $("#select_delivery").change(function(){
     switch ($(this).val()) {
-      case 1:
+      case "1":
         $("#nboor_div").fadeIn();
         break;
-      case 2:
-        $("#nboor_div").fadeOut();
+      case "2":
+      $("#nboor_div").fadeOut();
         break;
     }
-
   });
+
+  $("#btn_save_nboor").click(function(){
+    if($("#nboorname").val() != "" && $("#nboorprice").val() != ""){
+      $.post( "nboortaxes.php", {
+        nboorname: $("#nboorname").val(),
+        nboorprice: $("#nboorprice").val()
+       })
+      .done(function( data ) {
+        var obj = jQuery.parseJSON(data);
+        if(obj.status){
+          alert(obj.message);
+          location.reload();
+        }else{
+          alert(obj.message);
+        }
+      });
+    }else{
+      alert("Digite as informacoes sobre o bairro corretamente.");
+    }
+  });
+
+  $(".delete_nboor").click(function(){
+    var c = confirm("Tem certeza que quer excluir o bairro?");
+    if(c){
+      $.post( "del_nboor.php", {
+        id: $(this).attr("id")
+       })
+      .done(function( data ) {
+        var obj = jQuery.parseJSON(data);
+        if(obj.status){
+          alert(obj.message);
+          location.reload();
+        }else{
+          alert(obj.message);
+        }
+      });
+    }
+  });
+
+
+  $(".payment_form").change(function(){
+
+    if($(this).is(":checked")) {
+               var returnVal = confirm("Are you sure?");
+               $(this).attr("checked", returnVal);
+           }
+
+
+    // $.post( "edit_paymentform.php", {
+    //   value: $(this).val()
+    //  })
+    // .done(function( data ) {
+    //   var obj = jQuery.parseJSON(data);
+    //   if(obj.status){
+    //     alert(obj.message);
+    //     location.reload();
+    //   }else{
+    //     alert(obj.message);
+    //   }
+    // });
+  });
+
 
 });
 </script>
