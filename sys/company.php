@@ -429,9 +429,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                           <label> Formas de pagamento </label>
                          <div class="form-group has-feedback">
-                           <input type="checkbox" class="form-group payment_method" value="1" class="payment_form"> Dinheiro <br>
-                           <input type="checkbox" class="form-group payment_method" value="2" class="payment_form"> Cartão de Débito <br>
-                           <input type="checkbox" class="form-group payment_method" value="3" class="payment_form"> Cartão de crédito <br>
+                           <?php
+                            $checked1 = "";
+                            $checked2 = "";
+                            $checked3 = "";
+
+                            $SQL_payment = "SELECT * FROM user_payment_methods WHERE id_user='".$_SESSION['id_user']."' AND id_payment_method='1'";
+                            $result_pay = mysqli_query($con, $SQL_payment) or die(mysqli_error($con));
+                            if(mysqli_num_rows($result_pay) > 0){
+                              $checked1 = "checked='true'";
+                            }
+
+                            $SQL_payment2 = "SELECT * FROM user_payment_methods WHERE id_user='".$_SESSION['id_user']."' AND id_payment_method='2'";
+                            $result_pay2 = mysqli_query($con, $SQL_payment2) or die(mysqli_error($con));
+                            if(mysqli_num_rows($result_pay2) > 0){
+                              $checked2 = "checked='true'";
+                            }
+
+                            $SQL_payment3 = "SELECT * FROM user_payment_methods WHERE id_user='".$_SESSION['id_user']."' AND id_payment_method='3'";
+                            $result_pay3 = mysqli_query($con, $SQL_payment3) or die(mysqli_error($con));
+                            if(mysqli_num_rows($result_pay3) > 0){
+                              $checked3 = "checked='true'";
+                            }
+
+
+                            ?>
+                           <input type="checkbox" class="form-group payment_method" value="1" onchange="teste(1)" <?php echo $checked1 ?> class="payment_form"> Dinheiro <br>
+                           <input type="checkbox" class="form-group payment_method" value="2" onchange="teste(2)" <?php echo $checked2 ?>  class="payment_form"> Cartão de Débito <br>
+                           <input type="checkbox" class="form-group payment_method" value="3" onchange="teste(3)" <?php echo $checked3 ?>  class="payment_form"> Cartão de crédito <br>
 
 
                        </div>
@@ -554,31 +579,26 @@ $(document).ready(function(){
     }
   });
 
-
-  $(".payment_form").change(function(){
-
-    if($(this).is(":checked")) {
-               var returnVal = confirm("Are you sure?");
-               $(this).attr("checked", returnVal);
-           }
-
-
-    // $.post( "edit_paymentform.php", {
-    //   value: $(this).val()
-    //  })
-    // .done(function( data ) {
-    //   var obj = jQuery.parseJSON(data);
-    //   if(obj.status){
-    //     alert(obj.message);
-    //     location.reload();
-    //   }else{
-    //     alert(obj.message);
-    //   }
-    // });
-  });
-
-
 });
+
+
+function teste(i){
+  $.post( "edit_paymentform.php", {
+    value: i
+   })
+  .done(function( data ) {
+    console.log(data);
+
+
+    var obj = jQuery.parseJSON(data);
+    if(obj.status){
+      alert(obj.message);
+      location.reload();
+    }else{
+      alert(obj.message);
+    }
+  });
+}
 </script>
 
 </body>

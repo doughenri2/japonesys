@@ -128,18 +128,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <label> Nome da bebida</label>
                   <div class="form-group has-feedback">
                     <input type="text" class="form-control" id="drink_name" placeholder="Nome do telefone" >
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                  </div>
+                   </div>
                   <label> Preço da bebida </label>
                   <div class="form-group has-feedback">
                     <input type="text" class="form-control" id="drink_price" placeholder="Preço da bebida" >
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                  </div>
+                   </div>
                   <label> Quantidade </label>
                   <div class="form-group has-feedback">
                     <input type="number" class="form-control" id="qtd_drink" placeholder="Quantidade da bebida" >
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                  </div>
+                   </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -210,18 +207,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <label> Nome da sobremesa</label>
                         <div class="form-group has-feedback">
                           <input type="text" class="form-control" id="dessert_name" placeholder="Nome da sobremesa" >
-                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                        </div>
+                         </div>
                         <label> Preço da sobremesa </label>
                         <div class="form-group has-feedback">
                           <input type="text" class="form-control" id="dessert_price" placeholder="Preço da sobremesa" >
-                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                        </div>
+                         </div>
                         <label> Quantidade </label>
                         <div class="form-group has-feedback">
                           <input type="number" class="form-control" id="qtd_dessert" placeholder="Quantidade da sobremesa" >
-                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                        </div>
+                         </div>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

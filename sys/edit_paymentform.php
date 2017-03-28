@@ -4,12 +4,12 @@
   session_start();
   if(!empty($_POST)){
     $value = $_POST['value'];
-    $SQL_select = "SELECT * FROM user_payment_methods WHERE id_user='".$_SESSION['id_user']." AND id_payment_method='$value'";
-    $result_select = mysqli_query($SQL_select) or die(mysqli_error($con));
+    $SQL_select = "SELECT * FROM user_payment_methods WHERE id_user='".$_SESSION['id_user']."' AND id_payment_method='$value'";
+    $result_select = mysqli_query($con,$SQL_select) or die(mysqli_error($con));
     if(mysqli_num_rows($result_select) > 0){
-      $SQL_insert = "INSERT INTO user_payment_methods(id_payment_method) VALUES('$value') WHERE id_user='".$_SESSION['id_user']."'";
-      $result_insert = mysqli_query($SQL_insert) or die(mysqli_error($con));
-      if($result_insert){
+      $SQL_del = "DELETE FROM user_payment_methods WHERE id_user='".$_SESSION['id_user']."' AND id_payment_method='$value'";
+      $result_del = mysqli_query($con, $SQL_del) or die(mysqli_error($con));
+      if($result_del){
         $array = array("message" => "Pagamento alterado", "status" => true);
         echo json_encode($array);
       }else{
@@ -17,9 +17,9 @@
         echo json_encode($array);
       }
     }else{
-      $SQL_del = "DELETE FROM user_payment_methods WHERE id_user='".$_SESSION['id_user']." AND id_payment_method='$value'";
-      $result_del = mysqli_query($con, $SQL_del) or die(mysqli_error($con));
-      if($result_del){
+      $SQL_insert = "INSERT INTO user_payment_methods(id_user, id_payment_method) VALUES('".$_SESSION['id_user']."', '$value')";
+      $result_insert = mysqli_query($con, $SQL_insert) or die(mysqli_error($con));
+      if($result_insert){
         $array = array("message" => "Pagamento alterado", "status" => true);
         echo json_encode($array);
       }else{

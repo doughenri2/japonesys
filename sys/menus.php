@@ -107,117 +107,297 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <div class="col-md-12">
                           <h3> Elementos da refeição </h3>
-                          <div class="col-md-2">
-                            <button type="button" style="margin-top:25px;width:150px;" class="btn btn-success" id="add_rice"> Add arroz </button>
-                          </div>
+
+
                           <div class="col-md-6" >
                             <label> Arroz </label>
-                            <div class="input-group" id="div_rice">
-                            <input type="text" class="form-control">
-                                <span class="input-group-btn">
-                                  <button type="button" class="btn btn-info btn-flat">Go!</button>
-                                </span>
-                          </div>
-                            <div class="form-group" >
+                            <?php
+                            $SQL_rice = "SELECT * FROM pots_rice WHERE id_pot='".$row_pot['id']."'";
+                            $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
+                            ?>
+                            <table class='table table-hover'>
+                              <thead>
+                                <tr><th> Nome </th> <th><center> Ação </center></th>
+                              </thead>
                               <?php
-                              $SQL_rice = "SELECT * FROM pots_rice WHERE id_pot='".$row_pot['id']."'";
-                              $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
                               while($row = mysqli_fetch_assoc($result_rice)){
                               ?>
-                                <input type="text" class="form-control rice_name" value="<?php echo $row['name']?>" name="rice_name[]" placeholder="Digite o tipo de Arroz" ><br>
-                                <?php
+                              <tr><td><?php echo $row['name']?></td><td><center>
+                               <a href="delarroz.php?id=<?php echo $row['id']?>&id_pot=<?php echo $row_pot['id'] ?>"  class='btn btn-primary'> Excluir </a></td> </center></td> </center>
+
+                              <?php
                               }
                               ?>
-                            </div>
-                            </div>
+
+                            </table>
+
+
+                          </div>
+                          <div class="col-md-3">
+                            <button type="button" style="margin-top:25px;width:150px;"  data-toggle='modal' data-target='#modalarroz' class="btn btn-success"> Add arroz </button>
+                          </div>
+
                         </div>
 
                         <div class="col-md-12">
-                          <div class="col-md-6" >
-                            <label> Feijão </label>
-                            <div class="form-group has-feedback" id="div_bean">
-                              <?php
-                              $SQL_rice = "SELECT * FROM pots_beans WHERE id_pot='".$row_pot['id']."'";
-                              $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
-                              while($row = mysqli_fetch_assoc($result_rice)){
-                              ?>
-                              <input type="text" class="form-control bean_name" value="<?php echo $row['name']?>" name="bean_name[]" placeholder="Digite o tipo de Feijão" >
-                                <?php
-                              }
-                              ?>
-                            </div>
-                          </div>
-                          <div class="col-md-3">
-                            <button type="button" style="margin-top:25px;width:150px;" class="btn btn-success" id="add_bean"> Add Feijão </button>
-                          </div>
+
+                                                    <div class="col-md-6" >
+                                                      <label> Feijão </label>
+                                                      <?php
+                                                      $SQL_rice = "SELECT * FROM pots_beans WHERE id_pot='".$row_pot['id']."'";
+                                                      $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
+                                                      ?>
+                                                      <table class='table table-hover'>
+                                                        <thead>
+                                                          <tr><th> Nome </th> <th><center> Ação </center></th>
+                                                        </thead>
+                                                        <?php
+                                                        while($row = mysqli_fetch_assoc($result_rice)){
+                                                        ?>
+                                                        <tr><td><?php echo $row['name']?></td><td><center>
+                                                          <a href="delfeijao.php?id=<?php echo $row['id']?>&id_pot=<?php echo $row_pot['id'] ?>"  class='btn btn-primary'> Excluir </a></td> </center></td> </center>
+
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                      </table>
+
+
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                      <button type="button" style="margin-top:25px;width:150px;"  data-toggle='modal' data-target='#modalfeijao' class="btn btn-success"> Add Feijão </button>
+                                                    </div>
                         </div>
 
                         <div class="col-md-12">
-                          <div class="col-md-6" >
-                            <label> Mistura </label>
-                            <div class="form-group has-feedback" id="div_mixture">
-                              <?php
-                              $SQL_rice = "SELECT * FROM pots_mixture WHERE id_pot='".$row_pot['id']."'";
-                              $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
-                              while($row = mysqli_fetch_assoc($result_rice)){
-                              ?>
-                              <input type="text" class="form-control mixture_name" value="<?php echo $row['name']?>"  name="mixture_name[]" placeholder="Digite o tipo de Mistura" >
-                                <?php
-                              }
-                              ?>
-                            </div>
-                          </div>
-                          <div class="col-md-3">
-                            <button type="button" style="margin-top:25px;width:150px;" class="btn btn-success" id="add_mixture"> Add Mistura </button>
-                          </div>
+
+                                                    <div class="col-md-6" >
+                                                      <label> Mistura </label>
+                                                      <?php
+                                                      $SQL_rice = "SELECT * FROM pots_mixture WHERE id_pot='".$row_pot['id']."'";
+                                                      $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
+                                                      ?>
+                                                      <table class='table table-hover'>
+                                                        <thead>
+                                                          <tr><th> Nome </th> <th><center> Ação </center></th>
+                                                        </thead>
+                                                        <?php
+                                                        while($row = mysqli_fetch_assoc($result_rice)){
+                                                        ?>
+                                                        <tr><td><?php echo $row['name']?></td><td><center>
+                                                          <a href="delmistura.php?id=<?php echo $row['id']?>&id_pot=<?php echo $row_pot['id'] ?>"  class='btn btn-primary'> Excluir </a></td> </center></td> </center>
+</td> </center>
+
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                      </table>
+
+
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                      <button type="button" style="margin-top:25px;width:150px;"  data-toggle='modal' data-target='#modalmistura' class="btn btn-success"> Add Mistura </button>
+                                                    </div>
                         </div>
 
                         <div class="col-md-12">
-                          <div class="col-md-6" >
-                            <label> Guarnição </label>
-                            <div class="form-group has-feedback" id="div_garrison">
-                              <?php
-                              $SQL_rice = "SELECT * FROM pots_garrison WHERE id_pot='".$row_pot['id']."'";
-                              $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
-                              while($row = mysqli_fetch_assoc($result_rice)){
-                              ?>
-                              <input type="text" class="form-control garrison_name" value="<?php echo $row['name']?>"  name="garrison_name[]" placeholder="Digite o tipo de Guarnição" >
-                                <?php
-                              }
-                              ?>
-                            </div>
-                          </div>
-                          <div class="col-md-3">
-                            <button type="button" style="margin-top:25px;width:150px;" class="btn btn-success" id="add_garrison"> Add Guarnição </button>
-                          </div>
+
+                                                    <div class="col-md-6" >
+                                                      <label> Guarnição </label>
+                                                      <?php
+                                                      $SQL_rice = "SELECT * FROM pots_garrison WHERE id_pot='".$row_pot['id']."'";
+                                                      $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
+                                                      ?>
+                                                      <table class='table table-hover'>
+                                                        <thead>
+                                                          <tr><th> Nome </th> <th><center> Ação </center></th>
+                                                        </thead>
+                                                        <?php
+                                                        while($row = mysqli_fetch_assoc($result_rice)){
+                                                        ?>
+                                                        <tr><td><?php echo $row['name']?></td><td><center>  <a href="delguarnicao.php?id=<?php echo $row['id']?>&id_pot=<?php echo $row_pot['id'] ?>"  class='btn btn-primary'> Excluir </a> </td> </center>
+
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                      </table>
+
+
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                      <button type="button" style="margin-top:25px;width:150px;"  data-toggle='modal' data-target='#modalguarnicao' class="btn btn-success"> Add Guarnição </button>
+                                                    </div>
                         </div>
 
                         <div class="col-md-12">
-                          <div class="col-md-6" >
-                            <label> Salada </label>
-                            <div class="form-group has-feedback" id="div_salad">
-                              <?php
-                              $SQL_rice = "SELECT * FROM pots_salad WHERE id_pot='".$row_pot['id']."'";
-                              $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
-                              while($row = mysqli_fetch_assoc($result_rice)){
-                              ?>
-                              <input type="text" class="form-control salad_name" value="<?php echo $row['name']?>"  name="salad_name[]" placeholder="Digite o tipo de Salada" >
-                                <?php
-                              }
-                              ?>
-                            </div>
-                          </div>
-                          <div class="col-md-3">
-                            <button type="button" style="margin-top:25px;width:150px" class="btn btn-success" id="add_salad"> Add Salada </button>
-                          </div>
+
+                                                    <div class="col-md-6" >
+                                                      <label> Salada </label>
+                                                      <?php
+                                                      $SQL_rice = "SELECT * FROM pots_salad WHERE id_pot='".$row_pot['id']."'";
+                                                      $result_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
+                                                      ?>
+                                                      <table class='table table-hover'>
+                                                        <thead>
+                                                          <tr><th> Nome </th> <th><center> Ação </center></th>
+                                                        </thead>
+                                                        <?php
+                                                        while($row = mysqli_fetch_assoc($result_rice)){
+                                                        ?>
+                                                        <tr><td><?php echo $row['name']?></td><td><center><a href="delsalada.php?id=<?php echo $row['id']?>&id_pot=<?php echo $row_pot['id'] ?>"  class='btn btn-primary'> Excluir </a> </td> </center>
+
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                      </table>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                      <button type="button" style="margin-top:25px;width:150px;"  data-toggle='modal' data-target='#modalsalada' class="btn btn-success"> Add Salada </button>
+                                                    </div>
                         </div>
                       </div>
                       <div class="box-footer">
                           <div class='col-md-5'>
-                            <button type="submit" class='btn btn-primary'> Adicionar marmita </button>
+                            <button type="submit" class='btn btn-primary'> Editar marmita </button>
                           </div>
                       </div>
                     </form>
+
+
+                    <!-- modal arroz -->
+                    <div class="modal fade" id="modalarroz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Arroz</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form action='addarroz.php' method="post">
+                            <label> Arroz </label>
+                            <input type='hidden' name="id" value="<?php echo $row_pot['id']?>">
+                            <div class="form-group has-feedback">
+                              <input type="text" class="form-control" name='arroz' placeholder="Digite o arroz" >
+                            </div>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary" >Salvar</button>
+                          </div>
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- modal feijao -->
+                    <div class="modal fade" id="modalfeijao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Feijão</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form action='addfeijao.php' method="post">
+                            <label> Feijao </label>
+                            <input type='hidden' name="id" value="<?php echo $row_pot['id']?>">
+                            <div class="form-group has-feedback">
+                              <input type="text" class="form-control"  name='feijao' placeholder="Digite o feijão" >
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary" >Salvar</button>
+                          </div>
+                        </form>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- modal arroz -->
+                    <div class="modal fade" id="modalguarnicao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Guarnição</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form action='addguarni.php' method="post">
+                            <label> Guarnição </label>
+                            <input type='hidden' name="id" value="<?php echo $row_pot['id']?>">
+                            <div class="form-group has-feedback">
+                              <input type="text" class="form-control" name='guarni' placeholder="Digite a guarnição" >
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary" >Salvar</button>
+                          </div>
+                        </form>
+
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+
+                    <!-- modal arroz -->
+                    <div class="modal fade" id="modalmistura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Mistura</h4>
+                        </div>
+                        <div class="modal-body">
+                          <form action='addmistura.php' method="post">
+                          <label> Mistura </label>
+                          <input type='hidden' name="id" value="<?php echo $row_pot['id']?>">
+                          <div class="form-group has-feedback">
+                            <input type="text" class="form-control" name="mistura" placeholder="Digite a mistura" >
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                          <button type="sumbmit" class="btn btn-primary" >Salvar</button>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                    </div>
+
+                    <!-- modal arroz -->
+                    <div class="modal fade" id="modalsalada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Salada</h4>
+                        </div>
+                        <div class="modal-body">
+                          <form action='addsalada.php' method="post">
+                          <label> Salada </label>
+                          <input type='hidden' name="id" value="<?php echo $row_pot['id']?>">
+                          <div class="form-group has-feedback">
+                            <input type="text" class="form-control" name='salada' placeholder="Digite a salada" >
+                          </div>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                          <button type="submit" class="btn btn-primary" >Salvar</button>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                    </div>
+
                 <?php
               }else{
                 ?>
@@ -334,7 +514,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
           <!-- Modal -->
     </section>
-  </div>
+
+
+
   <?php
   rodape();
 

@@ -23,12 +23,6 @@
     $delivery_time = $_POST['delivery_time'];
     $id = $_POST['id'];
 
-    //food arrays
-    $rice_name = $_POST['rice_name'];
-    $bean_name = $_POST['bean_name'];
-    $mixture_name = $_POST['mixture_name'];
-    $garrison_name = $_POST['garrison_name'];
-    $salad_name = $_POST['salad_name'];
 
     //insert in de pot table
 
