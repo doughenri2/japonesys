@@ -8,12 +8,12 @@
       $start_hour = $_POST['start_hour'];
       $finish_hour = $_POST['finish_hour'];
       $select_delivery= $_POST['select_delivery'];
-      $city= $_POST['city'];
+      $city= utf8_encode($_POST['city']);
       $uf= $_POST['uf'];
       $cep = str_replace("-", "", $_POST['cep']);
-      $street= $_POST['street'];
+      $street= utf8_encode($_POST['street']);
       $number= $_POST['number'];
-      $nboor= $_POST['nboor'];
+      $nboor= utf8_encode($_POST['nboor']);
       $complement= $_POST['complement'];
 
       if($select_delivery == "0"){

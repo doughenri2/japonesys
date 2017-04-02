@@ -43,56 +43,47 @@
       </div>
     </nav>
     <div class="row">
-      <div class="col s6" >
+      <div class="col s12" >
 
       <?php
-      $nboor =  $_GET['nboor'];
+      $i =  $_GET['i'];
 
       // $SQL = "SELECT id_user FROM user_f  WHERE nboor like '%$nboor%' UNION SELECT id_user FROM user_j WHERE nboor like '%$nboor%'";
-      $SQL = "SELECT * FROM
-      (SELECT id_user,logo_address, user_name, start_hour, finish_hour, city, uf, street, number, nboor FROM user_f WHERE nboor = 'Vila betania'
-        UNION
-        SELECT id_user,logo_address, social_name, start_hour, finish_hour, city, uf, street, number, nboor as user_name FROM user_j WHERE nboor = 'Vila betania')
-       AS t";
+      $SQL = "SELECT * FROM pots WHERE MD5(id_user) = '$i' AND entry_date=CURDATE()";
       $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
         if($result){
           if(mysqli_num_rows($result) > 0){
             ?>
             <div class="col s12 ">
-              <h4> Restaurantes próximos a você: </h4>
+              <h4> Opções de hoje: </h4>
             </div>
             <?php
             ?>
               <?php
                     while($linha = mysqli_fetch_assoc($result)){
                     ?>
-                    <div class="col s12 ">
-                      <div class="card horizontal">
-                        <div class="card-image">
-                          <?php
-                            if($linha['logo_address'] != ""){
-                              ?>
-                              <img src="sys/<?php echo $linha['logo_address']?>">
-                              <?php
-                            }else{
-                              ?>
-                              <img src="http://lorempixel.com/100/190/nature/6">
-                              <?php
+                     <div class="col s12 m12">
+                      <div class="card  ">
+                        <div class="card-content">
+                          <span class="card-title">Opção <?php echo $linha['id'] ?></span>
+                          Tipo de arroz
+
+                          <ol>
+                           <?php
+                           $SQLarroz = "SELECT * from pots_rice WHERE id_pot='".$linha['id']."'";
+                           $result_rice = mysqli_query($con, $SQLarroz) or die(mysql_error($con));
+                            while($linha_rice = mysqli_fetch_assoc($result_rice)){
+                              echo "<li>".$linha_rice['name']."</li>";
                             }
                            ?>
+                          </ol>
                         </div>
-                        <div class="card-stacked">
-                          <div class="card-content">
-                            <h4> <?php echo utf8_encode($linha['user_name'])?> </h4>
-                            <p><?php echo utf8_encode("Estado: ".$linha['uf']."<br> ".$linha['street'].", ".$linha['number'].", ".$linha['nboor'].", ".$linha['city'] ); ?> </p>
-                          </div>
-                          <div class="card-action">
-                            <a href="company_pots.php?i=<?php echo md5($linha['id_user'])?>">Ver mais</a>
-                          </div>
+                        <div class="card-action">
+                          <a href="#">Ver mais</a>
                         </div>
                       </div>
                     </div>
-                        <?php
+                    <?php
                        }
                      }else {
 
@@ -104,9 +95,7 @@
 
 
              </div>
-             <div class="col s6"  >
 
-                    </div>
     </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

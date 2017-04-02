@@ -400,7 +400,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <label> Cidade </label>
                         <div class="form-group has-feedback">
-                          <input type="text" class="form-control" id="city" name="city" value="<?php echo $row['city']?>" placeholder="Cidade" >
+                          <input type="text" class="form-control" id="city" name="city" value="<?php echo utf8_encode($row['city'])?>" placeholder="Cidade" >
                         </div>
                         <label> UF </label>
                         <div class="form-group has-feedback">
@@ -408,7 +408,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                         <label> Rua </label>
                         <div class="form-group has-feedback">
-                          <input type="text" class="form-control" id="street" name="street" value="<?php echo $row['street']?>" placeholder="Rua" >
+                          <input type="text" class="form-control" id="street" name="street" value="<?php echo utf8_encode($row['street'])?>" placeholder="Rua" >
                         </div>
                         <label> Número </label>
                         <div class="form-group has-feedback">
@@ -416,7 +416,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                         <label> Bairro </label>
                         <div class="form-group has-feedback">
-                          <input type="text" class="form-control" id="nboor" name="nboor" value="<?php echo $row['nboor']?>" placeholder="Bairro" >
+                          <input type="text" class="form-control" id="nboor" name="nboor" value="<?php echo utf8_encode($row['nboor'])?>" placeholder="Bairro" >
                         </div>
                         <label> Complemento </label>
                         <div class="form-group has-feedback">
