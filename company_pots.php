@@ -48,7 +48,6 @@
       <?php
       $i =  $_GET['i'];
 
-      // $SQL = "SELECT id_user FROM user_f  WHERE nboor like '%$nboor%' UNION SELECT id_user FROM user_j WHERE nboor like '%$nboor%'";
       $SQL = "SELECT * FROM pots WHERE MD5(id_user) = '$i' AND entry_date=CURDATE()";
       $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
         if($result){
@@ -60,14 +59,13 @@
             <?php
             ?>
               <?php
-                    while($linha = mysqli_fetch_assoc($result)){
+                while($linha = mysqli_fetch_assoc($result)){
                     ?>
-                     <div class="col s12 m12">
+                     <div class="col s12 m6">
                       <div class="card  ">
                         <div class="card-content">
                           <span class="card-title">Opção <?php echo $linha['id'] ?></span>
                           Tipo de arroz
-
                           <ol>
                            <?php
                            $SQLarroz = "SELECT * from pots_rice WHERE id_pot='".$linha['id']."'";
@@ -76,10 +74,30 @@
                               echo "<li>".$linha_rice['name']."</li>";
                             }
                            ?>
-                          </ol>
+                         </ol><br>
+                         Tipo de Feijões
+                         <ol>
+                          <?php
+                          $SQLfeijao = "SELECT * from pots_beans WHERE id_pot='".$linha['id']."'";
+                          $result_feijao = mysqli_query($con, $SQLfeijao) or die(mysql_error($con));
+                           while($linha_feijao = mysqli_fetch_assoc($result_feijao)){
+                             echo "<li>".$linha_feijao['name']."</li>";
+                           }
+                          ?>
+                        </ol><br>
+                        Tipo de Misturas
+                        <ol>
+                         <?php
+                         $SQLmixture = "SELECT * from pots_mixture WHERE id_pot='".$linha['id']."'";
+                         $result_mixture = mysqli_query($con, $SQLmixture) or die(mysql_error($con));
+                          while($linha_mixture = mysqli_fetch_assoc($result_mixture)){
+                            echo "<li>".$linha_mixture['name']."</li>";
+                          }
+                         ?>
+                        </ol>
                         </div>
                         <div class="card-action">
-                          <a href="#">Ver mais</a>
+                          <a href="pots_details.php?i=<?php echo md5($linha['id'])?> ">Ver mais</a>
                         </div>
                       </div>
                     </div>
