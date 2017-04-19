@@ -1,5 +1,6 @@
 <?php
 session_start();
+require("func/func.php");
   ?>
 
 <!DOCUMENT html>
@@ -33,27 +34,7 @@ session_start();
 
   </head>
   <body>
-    <nav>
-      <div class="nav-wrapper grey darken-4">
-        <a href="#" class="brand-logo"><img src="images/logo.png" height="50" style="margin:8px;"></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="sass.html">Como pedir</a></li>
-          <li><a href="badges.html">Quem somos</a></li>
-          <?php
-          if(isset($_SESSION['name']) && $_SESSION['name'] !=""){
-            ?>
-            <li class="active"><a href="sys/sair.php">Sair</a></li>
-
-            <?php
-          }else{
-            ?>
-            <li class="active"><a href="sys/">Entrar</a></li>
-
-            <?php
-          }?>
-        </ul>
-      </div>
-    </nav>
+    <?php echo menu()?>
     <div class="row">
       <div class="col s12" id="div_background" style="border:0px solid red;height:100%;">
         <div class="col s12" style="border:0px solid #000; margin-top:5%;height:80%;">

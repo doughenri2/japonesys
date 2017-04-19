@@ -84,9 +84,8 @@ desired effect
         $SQL = "SELECT * FROM pots_asks WHERE id='".$_GET['id']."'";
         $resultado = mysqli_query($con, $SQL) or die(mysqli_error($con));
         $linha = mysqli_fetch_assoc($resultado);
-
          ?>
-              <div class="box-header with-border">
+            <div class="box-header with-border">
                 <h3 class="box-title">Detalhes do pedido </h3><br><br>
                 <div class='col-md-6'>
                   Tipo de arroz:
@@ -95,9 +94,8 @@ desired effect
                     $SQL_rice = "SELECT * FROM pots_rice WHERE id='".$linha['id_rice']."'";
                     $resultado_rice = mysqli_query($con, $SQL_rice) or die(mysqli_error($con));
                     $linha_rice = mysqli_fetch_assoc($resultado_rice);
-
                     ?>
-                    <input type="text" class="form-control" value="<?php echo $linha_rice['name']?>" placeholder="Arroz" >
+                    <input type="text" disabled="true" class="form-control" value="<?php echo $linha_rice['name']?>" placeholder="Arroz" >
                   </div>
                   Tipo de feijão:
                   <div class="form-group has-feedback">
@@ -105,42 +103,63 @@ desired effect
                     $SQL_bean= "SELECT * FROM pots_beans WHERE id='".$linha['id_bean']."'";
                     $resultado_bean = mysqli_query($con, $SQL_bean) or die(mysqli_error($con));
                     $linha_bean = mysqli_fetch_assoc($resultado_bean);
-
                     ?>
-                    <input type="text" class="form-control" value="<?php echo $linha_bean['name']?>" placeholder="Arroz" >
+                    <input type="text" disabled="true" class="form-control" value="<?php echo $linha_bean['name']?>" placeholder="Arroz" >
+                  </div>
+                  Tipo de mistura:
+                  <div class="form-group has-feedback">
+                    <?php
+                    $SQL_bean= "SELECT * FROM pots_mixture WHERE id='".$linha['id_mixture']."'";
+                    $resultado_bean = mysqli_query($con, $SQL_bean) or die(mysqli_error($con));
+                    $linha_bean = mysqli_fetch_assoc($resultado_bean);
+                    ?>
+                    <input type="text" disabled="true" class="form-control" value="<?php echo $linha_bean['name']?>" placeholder="Arroz" >
+                  </div>
+                  Tipo de salada:
+                  <div class="form-group has-feedback">
+                    <?php
+                    $SQL_bean= "SELECT * FROM pots_salad WHERE id='".$linha['id_salad']."'";
+                    $resultado_bean = mysqli_query($con, $SQL_bean) or die(mysqli_error($con));
+                    $linha_bean = mysqli_fetch_assoc($resultado_bean);
+                    ?>
+                    <input type="text" disabled="true" class="form-control"  value="<?php echo $linha_bean['name']?>" placeholder="Arroz" >
+                  </div>
+                  Tipo de Guarniçao:
+                  <div class="form-group has-feedback">
+                    <?php
+                    $SQL_bean= "SELECT * FROM pots_garrison WHERE id='".$linha['id_salad']."'";
+                    $resultado_bean = mysqli_query($con, $SQL_bean) or die(mysqli_error($con));
+                    $linha_bean = mysqli_fetch_assoc($resultado_bean);
+                    ?>
+                    <input type="text" disabled="true" class="form-control" value="<?php echo $linha_bean['name']?>"  placeholder="Arroz" >
+                  </div>
+                  Tipo de sobremesa:
+                  <div class="form-group has-feedback">
+                    <?php
+                    $SQL_bean= "SELECT * FROM dessert WHERE id='".$linha['id_dessert']."'";
+                    $resultado_bean = mysqli_query($con, $SQL_bean) or die(mysqli_error($con));
+                    $linha_bean = mysqli_fetch_assoc($resultado_bean);
+                    ?>
+                    <input type="text" disabled="true" class="form-control" value="<?php echo $linha_bean['dessert_name']?>"  placeholder="Arroz" >
                   </div>
                   Tipo de arroz:
                   <div class="form-group has-feedback">
-                    <input type="text" class="form-control"  placeholder="Arroz" >
+                    <?php
+                    $SQL_bean= "SELECT * FROM user_buyer WHERE id_user='".$linha['id_user']."'";
+                    $resultado_bean = mysqli_query($con, $SQL_bean) or die(mysqli_error($con));
+                    $linha_bean = mysqli_fetch_assoc($resultado_bean);
+                    ?>
+                    <input type="text"  disabled="true" class="form-control" value="<?php echo $linha_bean['name']?>"  placeholder="Arroz" >
                   </div>
                   Tipo de arroz:
                   <div class="form-group has-feedback">
-                    <input type="text" class="form-control"  placeholder="Arroz" >
+                    <textarea class="form-control" disabled="true"> <?php echo $linha['address']?> </textarea>
                   </div>
-                  Tipo de arroz:
-                  <div class="form-group has-feedback">
-                    <input type="text" class="form-control"  placeholder="Arroz" >
-                  </div>
-                  Tipo de arroz:
-                  <div class="form-group has-feedback">
-                    <input type="text" class="form-control"  placeholder="Arroz" >
-                  </div>
-                  Tipo de arroz:
-                  <div class="form-group has-feedback">
-                    <input type="text" class="form-control"  placeholder="Arroz" >
-                  </div>
+                  <button type="button" class="btn btn-primary"> Imprimir </button>
                 </div>
-
               </div>
-              <div class="box-body">
-
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-               </div>
               <!-- /.box-footer-->
             </div>
-
     </section>
   </div>
   <?php

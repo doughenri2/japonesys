@@ -1,6 +1,7 @@
 <?php
   require("connection/bd_connection.php");
   session_start();
+  require("func/func.php");
 ?>
 <!DOCUMENT html>
 <html>
@@ -33,30 +34,22 @@
 
   </head>
   <body>
-    <nav>
-      <div class="nav-wrapper grey darken-4">
-        <a href="#" class="brand-logo"><img src="images/logo.png" height="50" style="margin:8px;"></a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="sass.html">Como pedir</a></li>
-          <li><a href="badges.html">Quem somos</a></li>
-          <li class="active"><a href="sys/">Entrar</a></li>
-        </ul>
-      </div>
-    </nav>
+    <?php echo menu()?>
+
     <div class="row">
-      <div class="col s6">
+      <div class="col s12">
         <?php
         $i =  $_GET['i'];
         ?>
         <div class="card">
         <div class="card-content">
-          <h4> Montar marmita </h4>
+        <center>  <h4> Montar marmita </h4> </center>
           <p>Vamos lá! Selecione as opções e finalize o pedido! ;) </p><br>
           <form action="create_request_post/" method="post" id='new_pot_request'>
           <label> Selecione o arroz </label>
           <br>
            <select class="browser-default" id="rice"  name='rice'>
-             <option value=""> SELECIONE </option>
+             <option value="0"> SELECIONE </option>
             <?php
              $SQL_arroz = "SELECT * FROM pots_rice WHERE MD5(id_pot) = '$i'";
              $result_arroz = mysqli_query($con, $SQL_arroz) or die(mysqli_error());
@@ -71,7 +64,7 @@
          <label> Selecione o feijão </label>
          <br>
           <select class="browser-default" id="beans" name='beans' >
-            <option value=""> SELECIONE </option>
+            <option value="0"> SELECIONE </option>
            <?php
            $SQL_feijao = "SELECT * FROM pots_beans WHERE MD5(id_pot) = '$i'";
             $result_feijao = mysqli_query($con, $SQL_feijao) or die(mysqli_error());
@@ -86,7 +79,7 @@
         <label> Selecione a guarnição </label>
         <br>
          <select class="browser-default" id="garrison" name='garrison'>
-           <option value=""> SELECIONE </option>
+           <option value="0"> SELECIONE </option>
           <?php
           $SQL_feijao = "SELECT * FROM pots_garrison WHERE MD5(id_pot) = '$i'";
            $result_feijao = mysqli_query($con, $SQL_feijao) or die(mysqli_error());
@@ -101,7 +94,7 @@
        <label> Selecione a sua mistura </label>
        <br>
         <select class="browser-default"  id="mixture" name='mixture' >
-          <option value=""> SELECIONE </option>
+          <option value="0"> SELECIONE </option>
          <?php
          $SQL_feijao = "SELECT * FROM pots_mixture WHERE MD5(id_pot) = '$i'";
           $result_feijao = mysqli_query($con, $SQL_feijao) or die(mysqli_error());
@@ -116,7 +109,7 @@
       <label> Selecione a sua salada </label>
       <br>
        <select class="browser-default" id="salad" name='salad'>
-         <option value=""> SELECIONE </option>
+         <option value="0"> SELECIONE </option>
         <?php
         $SQL_feijao = "SELECT * FROM pots_salad WHERE MD5(id_pot) = '$i'";
          $result_feijao = mysqli_query($con, $SQL_feijao) or die(mysqli_error());
@@ -132,7 +125,7 @@
      <label> Selecione a sua salada </label>
      <br>
       <select class="browser-default" id="drinks" name='drinks'>
-        <option value=""> SELECIONE </option>
+        <option value="0"> SELECIONE </option>
        <?php
        $SQL_feijao = "SELECT * FROM drinks WHERE MD5(id_user) = '".$_GET['i_u']."'";
         $result_feijao = mysqli_query($con, $SQL_feijao) or die(mysqli_error());
@@ -147,7 +140,7 @@
      <label> Selecione o tamanho </label>
      <br>
       <select class="browser-default" id="pots"  name='pots'>
-        <option value=""> SELECIONE </option>
+        <option value="0"> SELECIONE </option>
        <?php
        $SQL_feijao = "SELECT * FROM pots WHERE MD5(id) = '$i'";
         $result_size = mysqli_query($con, $SQL_feijao) or die(mysqli_error());
@@ -161,7 +154,7 @@
     <label> Selecione o sobremesa </label>
     <br>
     <select class="browser-default" id="drinks"  name='dessert'>
-      <option value=""> SELECIONE </option>
+      <option value="0"> SELECIONE </option>
        <?php
        $SQL_feijao = "SELECT * FROM dessert WHERE MD5(id_user) = '".$_GET['i_u']."'";
         $result_feijao = mysqli_query($con, $SQL_feijao) or die(mysqli_error());
@@ -172,6 +165,12 @@
         }
        ?>
   </select>
+  <br>
+  <label> Digite o seu endereço </label>
+  <textarea name="address">
+
+  </textarea>
+  <br>
     <br>
     <?php
     if(isset($_SESSION['name']) && $_SESSION['name']!=""){
