@@ -1,3 +1,7 @@
+<?php
+session_start();
+  ?>
+
 <!DOCUMENT html>
 <html>
   <head>
@@ -35,7 +39,18 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="sass.html">Como pedir</a></li>
           <li><a href="badges.html">Quem somos</a></li>
-          <li class="active"><a href="sys/">Entrar</a></li>
+          <?php
+          if(isset($_SESSION['name']) && $_SESSION['name'] !=""){
+            ?>
+            <li class="active"><a href="sys/sair.php">Sair</a></li>
+
+            <?php
+          }else{
+            ?>
+            <li class="active"><a href="sys/">Entrar</a></li>
+
+            <?php
+          }?>
         </ul>
       </div>
     </nav>

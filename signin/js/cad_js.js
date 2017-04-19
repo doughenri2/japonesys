@@ -7,17 +7,23 @@
         case '1':
         $("#div_f").hide();
         $("#div_j").fadeIn(200);
+        $("#div_comprador").hide();
             break;
 
         case '2':
         $("#div_j").hide();
         $("#div_f").fadeIn(200);
+        $("#div_comprador").hide();
+
             break;
 
-        default:
-        $("#div_j").fadeOut(200);
-        $("#div_f").fadeOut(200);
-        alert("Você deve selecionar um tipo de pessoa para continuar.");
+        case '3':
+        $("#div_j").hide();
+        $("#div_f").hide();
+        $("#div_comprador").fadeIn(200);
+          break;
+
+
     }
   });
 
@@ -68,7 +74,6 @@
             window.location = "../login/";
           }else{
             alert("Erro ao cadastrar.");
-
           }
       });
     }

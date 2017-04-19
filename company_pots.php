@@ -48,8 +48,7 @@
       <?php
       $i =  $_GET['i'];
 
-      $SQL = "SELECT * FROM pots WHERE MD5(id_user) = '$i' AND entry_date=CURDATE()";
-      $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
+      $SQL = "SELECT * FROM pots WHERE MD5(id_user) = '$i' AND entry_date=CURDATE()";      $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
         if($result){
           if(mysqli_num_rows($result) > 0){
             ?>
@@ -97,14 +96,16 @@
                         </ol>
                         </div>
                         <div class="card-action">
-                          <a href="pots_details.php?i=<?php echo md5($linha['id'])?> ">Ver mais</a>
+                          <a href="pots_details.php?i=<?php echo md5($linha['id'])?>&i_u=<?php echo $i?> ">Ver mais</a>
                         </div>
                       </div>
                     </div>
                     <?php
                        }
                      }else {
-
+                        ?>
+                        <h4>Nenhum cardápio cadastrado no dia de hoje.</h4>
+                        <?php
                      }
                    }else{
                      echo "deu ruim";

@@ -39,7 +39,7 @@
         $array = array("message" => "Senhas não iguais.", "status" => false);
         echo json_encode($array);
       }
-    }else{
+    }else if($user_type == '2'){
 
       $name = $_POST['name'];
       $cpf = $_POST['cpf'];
@@ -73,6 +73,24 @@
         $array = array("message" => "Senhas não iguais.", "status" => false);
         echo json_encode($array);
       }
+    }else {
+      $name = $_POST['name_user'];
+      $login = $_POST['user_email'];
+      $password = $_POST['user_password'];
+        // INSERT QUERY
+        $SQL_insert1 = "INSERT INTO users(user_type, login, password, entry_date, user_status)
+        VALUES('$user_type', '$login', md5('$password'), CURDATE(), '1')";
+        $result_insert1 = mysqli_query($con, $SQL_insert1) or die(mysqli_error($con));
+        if($result_insert1){
+          //last insert id on table user
+          $last_id = mysqli_insert_id($con);
+          $SQL_insert2 = "INSERT INTO user_buyer(id_user, name) VALUES('$last_id', '$name')";
+          $result_insert2 = mysqli_query($con, $SQL_insert2) or die(mysqli_error($con));
+          if($result_insert2){
+            $array = array("message" => "Cadastrado com sucesso.", "status" => true);
+            echo json_encode($array);
+          }
+        }
     }
   }else{
     $array = array("message" => "No request.", "status" => false);

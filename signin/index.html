@@ -18,12 +18,7 @@
   <link rel="stylesheet" href="../components_sys/plugins/iCheck/square/blue.css">
   <style>
 
-  #div_j{
-    display: none;
-    padding: 0px;
-  }
-
-  #div_f{
+  #div_f, #div_comprador, #div_j{
     display: none;
     padding: 0px;
   }
@@ -51,6 +46,7 @@
        <option value='0'> Selecione o tipo de pessoa </option>
        <option value='1'>Pessoa Jurídica</option>
        <option value='2'>Pessoa Física</option>
+       <option value='3'>Comprador</option>
       </select>
     </div>
 
@@ -111,6 +107,23 @@
       <button type='submit' class="btn btn-primary btn-block btn-flat" id="btn_cad"> Cadastrar </button><br>
       </form>
     </div>
+    <div class='col-md-12' id='div_comprador' >
+      <form id='form_comprador'>
+      <div class="form-group has-feedback">
+         <input type="text" class="form-control" placeholder="Digite o seu nome" id='name_user'>
+        <span class="glyphicon glyphicon-inbox form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+         <input type="email" class="form-control" placeholder="Digite seu email" id='user_email'>
+        <span class="glyphicon glyphicon-inbox form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+         <input type="password" class="form-control" placeholder="Digite sua senha" id='user_password'>
+        <span class="glyphicon glyphicon-inbox form-control-feedback"></span>
+      </div>
+      <button type='submit' class="btn btn-primary btn-block btn-flat" id="btn_cad"> Cadastrar </button><br>
+      </form>
+    </div>
     <a href="../login/" class="text-center">Já sou cadastrado</a>
   </div>
   <!-- /.form-box -->
@@ -128,6 +141,7 @@
 <script src="../components_sys/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script src="js/cad_j.js"></script>
 <script src="js/cad_js.js"></script>
+<script src="js/cad_comprador.js"></script>
 <script>
   $(function () {
     $('input').iCheck({

@@ -5,6 +5,9 @@
     $login = anti_injection($_POST['login']);
     $password = anti_injection($_POST['password']);
     $SQL = "SELECT *, DATE_FORMAT(entry_date, '%d/%m/%Y') as date_entry FROM users WHERE login = '$login' AND password = md5('$password') AND user_status = '1' LIMIT 1";
+
+
+
     $result = mysqli_query($con, $SQL) or die(mysqli_error($con));
     if(mysqli_num_rows($result) > 0){
       $row = mysqli_fetch_assoc($result);
@@ -27,7 +30,7 @@
 
         header("Location: ../sys/");
 
-      }else{
+      }else if($row['user_type'] == "1"){
         //select fisica
         $SQL_u_f = "SELECT * FROM user_j WHERE id_user = '".$row['id']."'";
         $resultado_f = mysqli_query($con, $SQL_u_f) or die(mysqli_error($con));
@@ -43,6 +46,19 @@
 
         header("Location: ../sys/");
 
+      }else{
+        //select fisica
+        $SQL_u_f = "SELECT * FROM user_buyer WHERE id_user = '".$row['id']."'";
+
+        $resultado_f = mysqli_query($con, $SQL_u_f) or die(mysqli_error($con));
+        $row_f = mysqli_fetch_assoc($resultado_f);
+
+
+        session_start();
+        $_SESSION['name'] = $row_f['name'];;
+        $_SESSION['id_user'] = $row['id'];
+
+        header("Location: ../index.php");
       }
     }else{
       echo "<script> alert('Usuário não encontrado.'); window.location='../login/'; </script>";
