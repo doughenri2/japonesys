@@ -2,9 +2,9 @@
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 19-Abr-2017 às 15:59
--- Versão do servidor: 10.1.21-MariaDB
+-- Host: localhost
+-- Generation Time: Apr 20, 2017 at 01:09 AM
+-- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `dessert`
+-- Table structure for table `dessert`
 --
 
 CREATE TABLE `dessert` (
@@ -36,7 +36,7 @@ CREATE TABLE `dessert` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `dessert`
+-- Dumping data for table `dessert`
 --
 
 INSERT INTO `dessert` (`id`, `id_user`, `dessert_name`, `price`, `qtd_dessert`, `entry_date`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `dessert` (`id`, `id_user`, `dessert_name`, `price`, `qtd_dessert`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `drinks`
+-- Table structure for table `drinks`
 --
 
 CREATE TABLE `drinks` (
@@ -58,7 +58,7 @@ CREATE TABLE `drinks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `drinks`
+-- Dumping data for table `drinks`
 --
 
 INSERT INTO `drinks` (`id`, `id_user`, `drink_name`, `drink_price`, `qtd_drink`, `entry_date`) VALUES
@@ -84,7 +84,7 @@ INSERT INTO `drinks` (`id`, `id_user`, `drink_name`, `drink_price`, `qtd_drink`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `neighborhood_taxes`
+-- Table structure for table `neighborhood_taxes`
 --
 
 CREATE TABLE `neighborhood_taxes` (
@@ -95,7 +95,7 @@ CREATE TABLE `neighborhood_taxes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `neighborhood_taxes`
+-- Dumping data for table `neighborhood_taxes`
 --
 
 INSERT INTO `neighborhood_taxes` (`id`, `id_user`, `nboor_name`, `nboor_tax`) VALUES
@@ -104,7 +104,7 @@ INSERT INTO `neighborhood_taxes` (`id`, `id_user`, `nboor_name`, `nboor_tax`) VA
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `payment_methods`
+-- Table structure for table `payment_methods`
 --
 
 CREATE TABLE `payment_methods` (
@@ -113,7 +113,7 @@ CREATE TABLE `payment_methods` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `payment_methods`
+-- Dumping data for table `payment_methods`
 --
 
 INSERT INTO `payment_methods` (`id`, `payment_method`) VALUES
@@ -124,7 +124,7 @@ INSERT INTO `payment_methods` (`id`, `payment_method`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `phones`
+-- Table structure for table `phones`
 --
 
 CREATE TABLE `phones` (
@@ -135,7 +135,7 @@ CREATE TABLE `phones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `phones`
+-- Dumping data for table `phones`
 --
 
 INSERT INTO `phones` (`id`, `id_user`, `nome_telefone`, `tel_number`) VALUES
@@ -145,7 +145,7 @@ INSERT INTO `phones` (`id`, `id_user`, `nome_telefone`, `tel_number`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pots`
+-- Table structure for table `pots`
 --
 
 CREATE TABLE `pots` (
@@ -159,7 +159,7 @@ CREATE TABLE `pots` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `pots`
+-- Dumping data for table `pots`
 --
 
 INSERT INTO `pots` (`id`, `id_user`, `delivery_time`, `mini_size`, `normal_size`, `big_size`, `entry_date`) VALUES
@@ -179,36 +179,41 @@ INSERT INTO `pots` (`id`, `id_user`, `delivery_time`, `mini_size`, `normal_size`
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pots_asks`
+-- Table structure for table `pots_asks`
 --
 
 CREATE TABLE `pots_asks` (
   `id` int(11) NOT NULL,
-  `id_rice` int(11) NOT NULL,
-  `id_bean` int(11) NOT NULL,
-  `id_garrison` int(11) NOT NULL,
-  `id_mixture` int(11) NOT NULL,
-  `id_salad` int(11) NOT NULL,
-  `id_size` int(11) NOT NULL,
-  `id_dessert` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_rice` varchar(25) NOT NULL,
+  `id_bean` varchar(25) NOT NULL,
+  `id_garrison` varchar(11) NOT NULL,
+  `id_mixture` varchar(11) NOT NULL,
+  `id_salad` varchar(11) NOT NULL,
+  `id_size` varchar(11) NOT NULL,
+  `id_dessert` varchar(11) NOT NULL,
+  `id_user` varchar(11) NOT NULL,
   `id_company` varchar(250) NOT NULL,
+  `address` text NOT NULL,
   `entry_date` date NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `pots_asks`
+-- Dumping data for table `pots_asks`
 --
 
-INSERT INTO `pots_asks` (`id`, `id_rice`, `id_bean`, `id_garrison`, `id_mixture`, `id_salad`, `id_size`, `id_dessert`, `id_user`, `id_company`, `entry_date`, `status`) VALUES
-(2, 46, 14, 15, 14, 14, 1, 3, 12, 'c81e728d9d4c2f636f067f89cc14862c', '2017-04-19', 1),
-(3, 46, 14, 15, 14, 14, 1, 3, 12, 'c81e728d9d4c2f636f067f89cc14862c', '2017-04-19', 1);
+INSERT INTO `pots_asks` (`id`, `id_rice`, `id_bean`, `id_garrison`, `id_mixture`, `id_salad`, `id_size`, `id_dessert`, `id_user`, `id_company`, `address`, `entry_date`, `status`) VALUES
+(2, '46', '14', '15', '14', '14', '1', '3', '12', 'c81e728d9d4c2f636f067f89cc14862c', '', '2017-04-19', 1),
+(3, '46', '14', '15', '14', '14', '1', '3', '12', 'c81e728d9d4c2f636f067f89cc14862c', '', '2017-04-19', 1),
+(4, '46', '14', '15', '14', '14', '2', '3', '12', 'c81e728d9d4c2f636f067f89cc14862c', '', '2017-04-19', 1),
+(5, '0', '0', '0', '0', '0', '0', '0', '12', 'c81e728d9d4c2f636f067f89cc14862c', '\r\n  sas', '2017-04-19', 1),
+(6, '0', '0', '0', '0', '0', '0', '0', '12', 'c81e728d9d4c2f636f067f89cc14862c', 'teste\r\n  ', '2017-04-19', 1),
+(7, '46', '14', '15', '14', '14', '2', '3', '12', 'c81e728d9d4c2f636f067f89cc14862c', 'atchim\r\n  ', '2017-04-19', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pots_beans`
+-- Table structure for table `pots_beans`
 --
 
 CREATE TABLE `pots_beans` (
@@ -218,7 +223,7 @@ CREATE TABLE `pots_beans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `pots_beans`
+-- Dumping data for table `pots_beans`
 --
 
 INSERT INTO `pots_beans` (`id`, `id_pot`, `name`) VALUES
@@ -239,7 +244,7 @@ INSERT INTO `pots_beans` (`id`, `id_pot`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pots_garrison`
+-- Table structure for table `pots_garrison`
 --
 
 CREATE TABLE `pots_garrison` (
@@ -249,7 +254,7 @@ CREATE TABLE `pots_garrison` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `pots_garrison`
+-- Dumping data for table `pots_garrison`
 --
 
 INSERT INTO `pots_garrison` (`id`, `id_pot`, `name`) VALUES
@@ -271,7 +276,7 @@ INSERT INTO `pots_garrison` (`id`, `id_pot`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pots_mixture`
+-- Table structure for table `pots_mixture`
 --
 
 CREATE TABLE `pots_mixture` (
@@ -281,7 +286,7 @@ CREATE TABLE `pots_mixture` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `pots_mixture`
+-- Dumping data for table `pots_mixture`
 --
 
 INSERT INTO `pots_mixture` (`id`, `id_pot`, `name`) VALUES
@@ -302,7 +307,7 @@ INSERT INTO `pots_mixture` (`id`, `id_pot`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pots_rice`
+-- Table structure for table `pots_rice`
 --
 
 CREATE TABLE `pots_rice` (
@@ -312,7 +317,7 @@ CREATE TABLE `pots_rice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `pots_rice`
+-- Dumping data for table `pots_rice`
 --
 
 INSERT INTO `pots_rice` (`id`, `id_pot`, `name`) VALUES
@@ -326,7 +331,7 @@ INSERT INTO `pots_rice` (`id`, `id_pot`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pots_salad`
+-- Table structure for table `pots_salad`
 --
 
 CREATE TABLE `pots_salad` (
@@ -336,7 +341,7 @@ CREATE TABLE `pots_salad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `pots_salad`
+-- Dumping data for table `pots_salad`
 --
 
 INSERT INTO `pots_salad` (`id`, `id_pot`, `name`) VALUES
@@ -357,7 +362,7 @@ INSERT INTO `pots_salad` (`id`, `id_pot`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pots_sizes`
+-- Table structure for table `pots_sizes`
 --
 
 CREATE TABLE `pots_sizes` (
@@ -366,7 +371,7 @@ CREATE TABLE `pots_sizes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `pots_sizes`
+-- Dumping data for table `pots_sizes`
 --
 
 INSERT INTO `pots_sizes` (`id`, `size_name`) VALUES
@@ -377,7 +382,7 @@ INSERT INTO `pots_sizes` (`id`, `size_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pots_sizes_prices`
+-- Table structure for table `pots_sizes_prices`
 --
 
 CREATE TABLE `pots_sizes_prices` (
@@ -390,7 +395,7 @@ CREATE TABLE `pots_sizes_prices` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -403,7 +408,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `user_type`, `login`, `password`, `entry_date`, `user_status`) VALUES
@@ -418,12 +423,13 @@ INSERT INTO `users` (`id`, `user_type`, `login`, `password`, `entry_date`, `user
 (9, 3, 'teste@teste', '698dc19d489c4e4db73e28a713eab07b', '2017-04-18', 1),
 (10, 3, 'teste@teste', '698dc19d489c4e4db73e28a713eab07b', '2017-04-18', 1),
 (11, 3, 'teste@asuhdsauo', '698dc19d489c4e4db73e28a713eab07b', '2017-04-19', 1),
-(12, 3, 'ronaldo@ronaldo.com', 'c5aa3124b1adad080927ce4d144c6b33', '2017-04-19', 1);
+(12, 3, 'ronaldo@ronaldo.com', 'c5aa3124b1adad080927ce4d144c6b33', '2017-04-19', 1),
+(13, 3, 'ronaldo@ronaldo.com', 'c5aa3124b1adad080927ce4d144c6b33', '2017-04-19', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_buyer`
+-- Table structure for table `user_buyer`
 --
 
 CREATE TABLE `user_buyer` (
@@ -433,18 +439,19 @@ CREATE TABLE `user_buyer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `user_buyer`
+-- Dumping data for table `user_buyer`
 --
 
 INSERT INTO `user_buyer` (`id`, `id_user`, `name`) VALUES
 (1, 10, 'teste'),
 (2, 11, 'teste'),
-(3, 12, 'auhahua');
+(3, 12, 'auhahua'),
+(4, 13, 'ronaldo');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_f`
+-- Table structure for table `user_f`
 --
 
 CREATE TABLE `user_f` (
@@ -466,7 +473,7 @@ CREATE TABLE `user_f` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `user_f`
+-- Dumping data for table `user_f`
 --
 
 INSERT INTO `user_f` (`id`, `id_user`, `user_cpf`, `user_name`, `logo_address`, `start_hour`, `finish_hour`, `make_delivery`, `cep`, `city`, `uf`, `street`, `number`, `nboor`, `complement`) VALUES
@@ -476,7 +483,7 @@ INSERT INTO `user_f` (`id`, `id_user`, `user_cpf`, `user_name`, `logo_address`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_j`
+-- Table structure for table `user_j`
 --
 
 CREATE TABLE `user_j` (
@@ -499,7 +506,7 @@ CREATE TABLE `user_j` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `user_j`
+-- Dumping data for table `user_j`
 --
 
 INSERT INTO `user_j` (`id`, `id_user`, `user_cnpj`, `social_name`, `fantasy_name`, `logo_address`, `start_hour`, `finish_hour`, `make_delivery`, `cep`, `city`, `uf`, `street`, `number`, `nboor`, `complement`) VALUES
@@ -511,7 +518,7 @@ INSERT INTO `user_j` (`id`, `id_user`, `user_cnpj`, `social_name`, `fantasy_name
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_payment_methods`
+-- Table structure for table `user_payment_methods`
 --
 
 CREATE TABLE `user_payment_methods` (
@@ -523,7 +530,7 @@ CREATE TABLE `user_payment_methods` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_status`
+-- Table structure for table `user_status`
 --
 
 CREATE TABLE `user_status` (
@@ -534,7 +541,7 @@ CREATE TABLE `user_status` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user_types`
+-- Table structure for table `user_types`
 --
 
 CREATE TABLE `user_types` (
@@ -543,7 +550,7 @@ CREATE TABLE `user_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `user_types`
+-- Dumping data for table `user_types`
 --
 
 INSERT INTO `user_types` (`id`, `name`) VALUES
@@ -718,7 +725,7 @@ ALTER TABLE `pots`
 -- AUTO_INCREMENT for table `pots_asks`
 --
 ALTER TABLE `pots_asks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `pots_beans`
 --
@@ -758,12 +765,12 @@ ALTER TABLE `pots_sizes_prices`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `user_buyer`
 --
 ALTER TABLE `user_buyer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `user_f`
 --
