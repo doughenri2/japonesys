@@ -1,5 +1,7 @@
 <?php
   require("connection/bd_connection.php");
+  session_start();
+
   require("func/func.php");
 
 ?>
@@ -89,18 +91,18 @@
                         <?php
                        }
                      }else {
+                       ?>
+                       <h4>Nenhum estabelecimento perto</h4>
 
+                       <?php
                      }
                    }else{
-                     echo "deu ruim";
+                     echo "Erro";
                    }
                  ?>
-
-
              </div>
              <div class="col s6"  >
-
-                    </div>
+            </div>
     </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

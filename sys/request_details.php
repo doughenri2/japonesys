@@ -84,10 +84,29 @@ desired effect
         $SQL = "SELECT * FROM pots_asks WHERE id='".$_GET['id']."'";
         $resultado = mysqli_query($con, $SQL) or die(mysqli_error($con));
         $linha = mysqli_fetch_assoc($resultado);
+        $tamanh = "";
+        switch ($linha['id_size']) {
+          case '1':
+          $tamanh = "Mini";
+          break;
+          case '2':
+          $tamanh = "Média";
+          break;
+          case '3':
+          $tamanh = "Grande";
+          break;
+
+        }
+
+
          ?>
             <div class="box-header with-border">
                 <h3 class="box-title">Detalhes do pedido </h3><br><br>
                 <div class='col-md-6'>
+                  Tamanho da marmita:
+                  <div class="form-group has-feedback">
+                    <input type="text" disabled="true" class="form-control" value="<?php echo $tamanh?>"  >
+                  </div>
                   Tipo de arroz:
                   <div class="form-group has-feedback">
                     <?php
@@ -97,6 +116,7 @@ desired effect
                     ?>
                     <input type="text" disabled="true" class="form-control" value="<?php echo $linha_rice['name']?>" placeholder="Arroz" >
                   </div>
+
                   Tipo de feijão:
                   <div class="form-group has-feedback">
                     <?php
@@ -155,7 +175,7 @@ desired effect
                   <div class="form-group has-feedback">
                     <textarea class="form-control" disabled="true"> <?php echo $linha['address']?> </textarea>
                   </div>
-                  <button type="button" class="btn btn-primary"> Imprimir </button>
+                  <a href='print.php?id=<?php echo $_GET['id']?>' class="btn btn-primary"> Imprimir </a>
                 </div>
               </div>
               <!-- /.box-footer-->
